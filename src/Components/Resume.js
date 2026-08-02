@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import 'react-vertical-timeline-component/style.min.css';
 import Timeline from './Timeline';
+
+// chart.js v3 requires explicit registration of the pieces each chart uses.
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 class Resume extends Component {
   
@@ -44,10 +56,12 @@ class Resume extends Component {
 
     const options = {
       responsive: true,
-      scale: {
-        ticks: { beginAtZero: true },
-        min: 0,
-        max: 100
+      scales: {
+        r: {
+          beginAtZero: true,
+          min: 0,
+          max: 100
+        }
       }
     };
 
