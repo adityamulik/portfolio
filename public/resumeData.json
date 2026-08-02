@@ -19,29 +19,9 @@
     "resumedownload":"https://drive.google.com/file/d/1keJVejGW6Rk_cjPempa31a1UioCdaQOQ/view?usp=sharing",
     "social":[
       {
-        "name":"facebook",
-        "url":"http://facebook.com/mulikaditya",
-        "className":"fa fa-facebook"
-      },
-      {
-        "name":"twitter",
-        "url":"http://twitter.com/adityamulik",
-        "className":"fa fa-twitter"
-      },
-      {
         "name":"linkedin",
         "url":"https://www.linkedin.com/in/adityamulik",
         "className":"fa fa-linkedin"
-      },
-      {
-        "name":"instagram",
-        "url":"http://instagram.com/adityamulik",
-        "className":"fa fa-instagram"
-      },
-      {
-        "name":"github",
-        "url":"http://github.com/adityamulik",
-        "className":"fa fa-github"
       }
     ]
   },
