@@ -33,7 +33,7 @@ header {
    height: 800px;
    min-height: 500px;
    width: 100%;
-   background: #161415;
+   background: #ECECEC;
    text-align: center;
    overflow: hidden;
 }
@@ -57,21 +57,19 @@ header .banner {
 header .banner-text { width: 100%; }
 header .banner-text h1 {
    font: 90px/1.1em 'opensans-bold', sans-serif;
-   color: #fff;
+   color: #2b2b2b;
    letter-spacing: -2px;
    margin: 0 auto 18px auto;
-   text-shadow: 0px 1px 3px rgba(0, 0, 0, .8);
 }
 header .banner-text h3 {
    font: 18px/1.9em 'librebaskerville-regular', serif;
-   color: rgb(255, 255, 255);
+   color: #2b2b2b;
    margin: 0 auto;
    width: 70%;
-   text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
 }
 header .banner-text h3 span,
 header .banner-text h3 a {
-   color: #fff;
+   color: #11ABB0;
 }
 header .banner-text hr {
    width: 60%;
@@ -85,14 +83,13 @@ header .social {
    margin: 24px 0;
    padding: 0;
    font-size: 30px;
-   text-shadow: 0px 1px 2px rgba(0, 0, 0, .8);
 }
 header .social li {
    display: inline-block;
    margin: 0 15px;
    padding: 0;
 }
-header .social li a { color: #fff; }
+header .social li a { color: #2b2b2b; }
 header .social li a:hover { color: #11ABB0; }
 
 /* scrolldown link */
@@ -101,13 +98,13 @@ header .scrolldown a {
    bottom: 30px;
    left: 50%;
    margin-left: -29px;
-   color: #fff;
+   color: #2b2b2b;
    display: block;
    height: 42px;
    width: 42px;
    font-size: 42px;
    line-height: 42px;
-   color: #fff;
+   color: #2b2b2b;
    border-radius: 100%;
 
    -webkit-transition: all .3s ease-in-out;
@@ -167,7 +164,7 @@ ul#nav li a {
    line-height: 32px;
 	text-decoration: none;
    text-align: left;
-   color: #fff;
+   color: #2b2b2b;
 
 	-webkit-transition: color .2s ease-in-out;
 	-moz-transition: color .2s ease-in-out;
@@ -178,6 +175,10 @@ ul#nav li a {
 
 ul#nav li a:active { background-color: transparent !important; }
 ul#nav li.current a { color: #11ABB0; }
+
+/* nav links turn white once the fixed bar gets its dark opaque background on scroll */
+.opaque ul#nav li a { color: #fff; }
+.opaque ul#nav li.current a { color: #11ABB0; }
 
 
 /* ------------------------------------------------------------------ */
