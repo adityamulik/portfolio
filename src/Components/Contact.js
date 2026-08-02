@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import React, { Component } from 'react';
 
 class Contact extends Component {
@@ -13,8 +12,7 @@ class Contact extends Component {
          emailValid: false,
          patternValid: false,
          messageValid: false,
-         disabled: true,
-         twitterFeeds: []
+         disabled: true
       }
       this.handleNameChange = this.handleNameChange.bind(this);
       this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -55,56 +53,13 @@ class Contact extends Component {
       });
    }
 
-   componentDidMount() {
-      fetch('/.netlify/functions/twitterApi')
-         .then(res => res.json())
-         .then(data => {
-            
-            this.setState({
-               twitterFeeds: data.data
-            })
-
-            if (data.data !== undefined) {
-               data.data.map(item => {
-                  return <li key={item.text}>
-                     <span>
-                        {item.text}
-                     </span>
-                  </li>
-               })
-            }
-            else {
-               return;
-            }
-         });
-   }
-
    render() {
-
-      // console.log(this.state.twitterFeeds.length);
-
-      if(this.state.twitterFeeds !== undefined) {
-         var twitterFeed = this.state.twitterFeeds.slice(0, 3).map(item => {
-         const date = item.created_at.slice(0, 10).split('-');
-         const myDate = (new Date(date[0], date[1] - 1, date[2])).toDateString().slice(4,);
-
-            return <li key={item.text}>
-                     <span key={item.text}>
-                        {item.text}
-                     </span>
-                     <br></br>
-                     <b> - Tweeted on {myDate} </b>
-                  </li>
-         });
-      }
 
       if(this.props.data){
          var name = this.props.data.name;
-         var street = this.props.data.address.street;
          var city = this.props.data.address.city;
          var state = this.props.data.address.state;
          var zip = this.props.data.address.zip;
-         var phone= this.props.data.phone;
       }
 
       return (
@@ -161,18 +116,6 @@ class Contact extends Component {
                         {name}<br />
                         {city}, {state} {zip}<br />
                      </p>
-                  </div>
-                  <div className="widget widget_tweets">
-                     <h4 className="widget-title">Latest Tweets</h4>
-                        {
-                           this.state.twitterFeeds !== undefined
-                        ?
-                           <ul>
-                              {twitterFeed}
-                           </ul>
-                        :
-                           <p>Aditya hasn't tweeted anything recently!</p>
-                        }
                   </div>
                </aside>
          </div>
