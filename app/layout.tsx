@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { ResumeProvider } from "@/components/ResumeModal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { profile } from "@/content/profile";
@@ -32,9 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${grotesk.variable} ${inter.variable}`}>
       <body className="min-h-screen antialiased">
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <ResumeProvider>
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </ResumeProvider>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ writes a static site to `out/`.
 
 ## Writing (internal)
 
-The `/writing` page stays blank until a published post exists. To add one, put a file in `content/writing/`:
+The `/writing` page has two sections: **Elsewhere** (venues like InfoQ, from `content/external-writing.ts`) and **Notes** (markdown in `content/writing/`). Notes stay blank until you add a published `.md` file.
 
 ```yaml
 ---

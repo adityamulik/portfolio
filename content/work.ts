@@ -25,12 +25,21 @@ export const roles: Role[] = [
     company: "Walmart Global Tech",
     title: "Senior Software Engineer",
     location: "Herndon, VA",
-    dates: "Jan 2023 - Present",
+    dates: "Nov 2025 - Present",
     bullets: [
       "To give store associates a faster way to get work done, built an agentic app (Feb 2026 - present) that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
       "To support multimodal AI across store products, engineered multi-agent orchestration on Google ADK for the Store Agentic Platform, enabling voice, vision and text conversations and giving associates real-time store information in one place.",
-      "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus ingestion pipelines with a read-through cache, delivering low-latency tier-0 availability (99.999%) for millions of users. Early work on this path included associate clock-in status for 5000+ stores and about 3 million associates.",
       "To improve Fresh produce inventory accuracy, built a multi-agent workflow that combines time-series forecasting with live inventory status, weather and related signals so stores waste less and stock what they actually need.",
+    ],
+  },
+  {
+    company: "Walmart Global Tech",
+    title: "Software Engineer III",
+    location: "Herndon, VA",
+    dates: "Jan 2023 - Nov 2025",
+    bullets: [
+      "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus ingestion pipelines with a read-through cache, delivering low-latency tier-0 availability (99.999%) for millions of users.",
+      "Worked the associate clock-in path used across 5000+ stores and about 3 million associates, including caching so store operations could depend on 99.999% uptime.",
     ],
   },
   {

@@ -212,18 +212,6 @@ export const evidence: EvidenceItem[] = [
       "https://www.linkedin.com/posts/adityamulik_walmartglobaltechathon-activity-7219282996753805312-kuGx",
     featured: false,
   },
-  {
-    slug: "senior-promotion-2025",
-    category: "award",
-    title: "Promoted to Senior Software Engineer",
-    venue: "Walmart Global Tech",
-    date: "2025",
-    summary:
-      "Promotion to Senior Software Engineer, reflecting sustained platform work on store systems.",
-    proofLabel: "LinkedIn",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
-    featured: false,
-  },
 ];
 
 export const featuredEvidence = evidence.filter((item) => item.featured);

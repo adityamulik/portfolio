@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { nav, profile } from "@/content/profile";
 import { Container } from "@/components/ui";
+import { ResumeButton } from "@/components/ResumeModal";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") {
@@ -18,7 +19,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-stone/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-surface/90 backdrop-blur-md">
       <Container className="flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <span className="flex h-9 w-9 items-center justify-center rounded-md bg-accent font-display text-sm font-semibold text-white">
@@ -42,12 +43,9 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a
-            href={profile.resumePath}
-            className="rounded-md border border-ink/15 px-4 py-1.5 text-ink transition hover:border-accent hover:text-accent"
-          >
+          <ResumeButton className="rounded-md bg-accent px-4 py-1.5 text-white transition hover:brightness-110">
             Resume
-          </a>
+          </ResumeButton>
         </nav>
         <button
           type="button"
@@ -59,16 +57,14 @@ export function SiteHeader() {
         </button>
       </Container>
       {open ? (
-        <div className="border-t border-ink/10 bg-stone md:hidden">
+        <div className="border-t border-ink/10 bg-surface md:hidden">
           <Container className="flex flex-col gap-4 py-4 text-sm">
             {nav.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
                 {item.label}
               </Link>
             ))}
-            <a href={profile.resumePath} onClick={() => setOpen(false)}>
-              Resume
-            </a>
+            <ResumeButton className="text-left text-accent">Resume</ResumeButton>
           </Container>
         </div>
       ) : null}

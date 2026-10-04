@@ -7,7 +7,7 @@ export function WorkCard({ item }: { item: CaseStudy }) {
   return (
     <Link
       href={`/work/${item.slug}/`}
-      className="group flex h-full min-h-[260px] flex-col rounded-lg border border-ink/10 bg-paper p-6 transition hover:border-accent/50"
+      className="group flex h-full min-h-[260px] flex-col rounded-lg border border-ink/10 bg-surface p-6 shadow-sm transition hover:border-accent/50"
     >
       <p className="eyebrow">{item.eyebrow}</p>
       <h3 className="mt-3 font-display text-2xl text-ink">{item.title}</h3>
@@ -19,7 +19,7 @@ export function WorkCard({ item }: { item: CaseStudy }) {
 
 export function EvidenceCard({ item }: { item: EvidenceItem }) {
   return (
-    <article className="flex h-full flex-col rounded-lg border border-ink/10 bg-paper p-6">
+    <article className="flex h-full flex-col rounded-lg border border-ink/10 bg-surface p-6 shadow-sm">
       <p className="eyebrow">{item.venue}</p>
       <h3 className="mt-3 font-display text-2xl text-ink">{item.title}</h3>
       <p className="mt-1 text-sm text-ink-muted">{item.date}</p>
@@ -40,7 +40,7 @@ export function PostCard({ post }: { post: PostMeta }) {
   return (
     <Link
       href={`/writing/${post.slug}/`}
-      className="block rounded-lg border border-ink/10 bg-paper p-6 transition hover:border-accent/50"
+      className="block rounded-lg border border-ink/10 bg-surface p-6 shadow-sm transition hover:border-accent/50"
     >
       <p className="text-sm text-ink-muted">{post.date}</p>
       <h3 className="mt-2 font-display text-2xl text-ink">{post.title}</h3>

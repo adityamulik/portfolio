@@ -53,7 +53,7 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
             ))}
           </ul>
         </section>
-        <aside className="h-fit rounded-lg border border-ink/10 bg-paper p-6">
+        <aside className="h-fit rounded-lg border border-ink/10 bg-surface p-6 shadow-sm">
           <p className="eyebrow">Stack</p>
           <ul className="mt-4 space-y-2 text-ink">
             {item.stack.map((tech) => (

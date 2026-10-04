@@ -14,13 +14,13 @@ export default function WorkPage() {
     <Container className="py-16">
       <SectionHeading
         eyebrow="Work"
-        title="Experience, then the systems behind it."
+        title="Experience then the systems behind it"
         description="Roles match the resume. Case studies unpack the platform work behind them."
       />
 
       <ol className="mt-14 space-y-10">
         {roles.map((role) => (
-          <li key={`${role.company}-${role.title}`} className="grid gap-4 border-t border-ink/10 pt-10 md:grid-cols-[220px_1fr]">
+          <li key={`${role.company}-${role.title}-${role.dates}`} className="grid gap-4 border-t border-ink/10 pt-10 md:grid-cols-[220px_1fr]">
             <div>
               <p className="text-sm text-ink-muted">{role.dates}</p>
               <p className="mt-2 font-medium text-ink">{role.company}</p>
