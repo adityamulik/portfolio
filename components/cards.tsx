@@ -3,6 +3,7 @@ import type { CaseStudy } from "@/content/work";
 import type { RecognitionItem } from "@/content/recognition";
 import type { PostMeta } from "@/lib/posts";
 import { formatWritingDate } from "@/lib/dates";
+import { PdfLink } from "@/components/ResumeModal";
 
 export function WorkCard({ item }: { item: CaseStudy }) {
   return (
@@ -32,21 +33,9 @@ export function RecognitionCard({ item }: { item: RecognitionItem }) {
       <p className="mt-3 flex-1 text-ink-muted">{item.summary}</p>
       {proofs.length ? (
         <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-          {proofs.map((proof) => {
-            const external = /^https?:\/\//.test(proof.url);
-            return (
-              <a
-                key={proof.url}
-                href={proof.url}
-                className="text-sm text-accent underline decoration-accent/30 underline-offset-4"
-                target="_blank"
-                rel={external ? "noreferrer" : undefined}
-              >
-                {proof.label}
-                {external ? " ↗" : ""}
-              </a>
-            );
-          })}
+          {proofs.map((proof) => (
+            <PdfLink key={proof.url} href={proof.url} label={proof.label} />
+          ))}
         </div>
       ) : null}
     </article>

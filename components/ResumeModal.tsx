@@ -10,28 +10,35 @@ import {
 } from "react";
 import { profile } from "@/content/profile";
 
-type ResumeContextValue = {
-  open: boolean;
-  setOpen: (value: boolean) => void;
+type PdfDoc = {
+  src: string;
+  title: string;
 };
 
-const ResumeContext = createContext<ResumeContextValue | null>(null);
+type PdfContextValue = {
+  openPdf: (doc: PdfDoc) => void;
+  close: () => void;
+};
+
+const PdfContext = createContext<PdfContextValue | null>(null);
 
 export function ResumeProvider({ children }: { children: ReactNode }) {
-  const [open, setOpen] = useState(false);
+  const [doc, setDoc] = useState<PdfDoc | null>(null);
+  const openPdf = useCallback((next: PdfDoc) => setDoc(next), []);
+  const close = useCallback(() => setDoc(null), []);
 
   return (
-    <ResumeContext.Provider value={{ open, setOpen }}>
+    <PdfContext.Provider value={{ openPdf, close }}>
       {children}
-      <ResumeDialog />
-    </ResumeContext.Provider>
+      <PdfDialog doc={doc} close={close} />
+    </PdfContext.Provider>
   );
 }
 
-export function useResumeModal() {
-  const value = useContext(ResumeContext);
+function usePdfModal() {
+  const value = useContext(PdfContext);
   if (!value) {
-    throw new Error("useResumeModal must be used inside ResumeProvider");
+    throw new Error("PDF links must be used inside ResumeProvider");
   }
   return value;
 }
@@ -43,20 +50,61 @@ export function ResumeButton({
   children: ReactNode;
   className?: string;
 }) {
-  const { setOpen } = useResumeModal();
+  const { openPdf } = usePdfModal();
   return (
-    <button type="button" className={className} onClick={() => setOpen(true)}>
+    <button
+      type="button"
+      className={className}
+      onClick={() => openPdf({ src: profile.resumePath, title: "Resume" })}
+    >
       {children}
     </button>
   );
 }
 
-function ResumeDialog() {
-  const { open, setOpen } = useResumeModal();
-  const close = useCallback(() => setOpen(false), [setOpen]);
+const linkClass =
+  "text-sm text-accent underline decoration-accent/30 underline-offset-4";
 
+function isLocalPdf(href: string) {
+  return href.startsWith("/") && href.toLowerCase().endsWith(".pdf");
+}
+
+export function PdfLink({
+  href,
+  label,
+  className = linkClass,
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) {
+  const { openPdf } = usePdfModal();
+
+  if (!isLocalPdf(href)) {
+    const external = /^https?:\/\//.test(href);
+    return (
+      <a
+        href={href}
+        className={className}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+      >
+        {label}
+        {external ? " ↗" : ""}
+      </a>
+    );
+  }
+
+  return (
+    <button type="button" className={`${className} text-left`} onClick={() => openPdf({ src: href, title: label })}>
+      {label}
+    </button>
+  );
+}
+
+function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
   useEffect(() => {
-    if (!open) {
+    if (!doc) {
       return;
     }
     const onKey = (event: KeyboardEvent) => {
@@ -70,9 +118,9 @@ function ResumeDialog() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [open, close]);
+  }, [doc, close]);
 
-  if (!open) {
+  if (!doc) {
     return null;
   }
 
@@ -80,44 +128,30 @@ function ResumeDialog() {
     <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-8">
       <button
         type="button"
-        aria-label="Close resume"
+        aria-label="Close document"
         className="absolute inset-0 bg-navy/70 backdrop-blur-sm"
         onClick={close}
       />
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Resume"
+        aria-label={doc.title}
         className="relative flex h-[min(90vh,920px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-surface shadow-2xl"
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-3">
           <div>
-            <p className="font-display text-lg text-ink">Resume</p>
+            <p className="font-display text-lg text-ink">{doc.title}</p>
             <p className="text-sm text-ink-muted">{profile.name}</p>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href={profile.resumePath}
-              className="text-sm text-accent"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open PDF
-            </a>
-            <button
-              type="button"
-              onClick={close}
-              className="rounded-md border border-ink/10 px-3 py-1.5 text-sm text-ink hover:border-accent"
-            >
-              Close
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={close}
+            className="rounded-md border border-ink/10 px-3 py-1.5 text-sm text-ink hover:border-accent"
+          >
+            Close
+          </button>
         </div>
-        <iframe
-          title={`${profile.name} resume`}
-          src={`${profile.resumePath}#view=FitH`}
-          className="h-full w-full bg-white"
-        />
+        <iframe title={doc.title} src={`${doc.src}#view=FitH`} className="h-full w-full bg-white" />
       </div>
     </div>
   );
