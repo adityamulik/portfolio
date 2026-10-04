@@ -28,7 +28,7 @@ export const roles: Role[] = [
     location: "Herndon, VA",
     dates: "Nov 2025 - Present",
     bullets: [
-      "To give store associates a faster way to get work done, built an agentic app (Feb 2026 - present) that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
+      "To give store associates a faster way to get work done, built an agentic app (Feb 2026 - present) that puts live store data in one surface instead of tens of applications, with frontier and other models behind in-house context engineering instead of raw public model access.",
       "To support multimodal AI across store products, engineered multi-agent orchestration on Google ADK for the Store Agentic Platform, enabling voice, vision and text conversations and giving associates real-time store information in one place.",
       "To improve Fresh produce inventory accuracy, built a multi-agent workflow that combines time-series forecasting with live inventory status, weather and related signals so stores waste less and stock what they actually need.",
     ],
@@ -50,6 +50,16 @@ export const roles: Role[] = [
     dates: "May 2022 - Aug 2022",
     bullets: [
       "To help global enterprise users adopt Ansible products in their own languages, co-developed the official Ansible Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
+    ],
+    links: [
+      {
+        label: "GitHub · ansible-collection-memsource",
+        href: "https://github.com/ansible/ansible-collection-memsource",
+      },
+      {
+        label: "GitHub · python-memsource",
+        href: "https://github.com/ansible/python-memsource",
+      },
     ],
   },
   {
@@ -113,9 +123,9 @@ export const caseStudies: CaseStudy[] = [
       "Treated grounding, tool contracts and failure recovery as platform concerns so other store products can reuse the same layer.",
     ],
     impact: [
-      "Cut manual data lookup by 80%.",
+      "One conversational surface instead of bouncing through tens of applications.",
+      "Frontier and other models served with in-house context engineering, not raw public model access.",
       "Now scaling across multiple markets.",
-      "Associates get store information in one conversational surface.",
     ],
     stack: ["Google ADK", "MCP", "Agent Skills", "Vertex AI (Gemini)", "Python"],
   },
@@ -194,12 +204,16 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Python", "Ansible", "YAML", "Memsource API"],
     links: [
       {
-        label: "Ansible Galaxy · ansible.memsource",
-        href: "https://galaxy.ansible.com/ui/repo/published/ansible/memsource/",
+        label: "github.com/ansible/ansible-collection-memsource",
+        href: "https://github.com/ansible/ansible-collection-memsource",
       },
       {
         label: "github.com/ansible/python-memsource",
         href: "https://github.com/ansible/python-memsource",
+      },
+      {
+        label: "Ansible Galaxy · ansible.memsource",
+        href: "https://galaxy.ansible.com/ui/repo/published/ansible/memsource/",
       },
     ],
   },

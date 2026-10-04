@@ -27,24 +27,21 @@ export const nav = [
 
 export const impactStats = [
   {
-    value: "80%",
-    label: "Less manual data lookup",
-    detail: "Agentic store workflows on live data via MCP tools and skills.",
-  },
-  {
     value: "30+",
     label: "Federated providers",
-    detail: "GraphQL gateway with a read-through cache for low-latency tier-0 traffic.",
+    detail: "One GraphQL gateway with a read-through cache so clients query a single graph.",
   },
   {
     value: "99.999%",
-    label: "Availability",
-    detail: "Ingestion and cache on a path that store operations depend on.",
+    label: "Availability for millions of users",
+    detail:
+      "Federated gateway and caching on a tier-0 path. Minimal downtime because operations depend on it.",
   },
   {
-    value: "2,000+",
-    label: "Galaxy downloads",
-    detail: "Ansible Memsource collection for enterprise localization.",
+    value: "1 surface",
+    label: "Instead of tens of apps",
+    detail:
+      "Associates get live data in one place. Frontier and other models sit behind in-house context engineering, not raw public model access.",
   },
 ];
 

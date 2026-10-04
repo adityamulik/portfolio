@@ -33,7 +33,6 @@ export default function HomePage() {
               {profile.title}
             </p>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-foam/70">{profile.tagline}</p>
-            <p className="mt-5 max-w-xl text-foam/70">{profile.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ResumeButton className="rounded-md bg-accent px-5 py-2.5 text-sm text-white transition hover:brightness-110">
                 View resume
@@ -68,7 +67,7 @@ export default function HomePage() {
       </section>
 
       <section className="bg-surface">
-        <Container className="grid gap-8 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <Container className="grid gap-8 py-14 sm:grid-cols-2 lg:grid-cols-3">
           {impactStats.map((stat) => (
             <div key={stat.label}>
               <p className="font-display text-4xl text-ink">{stat.value}</p>
