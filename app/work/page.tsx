@@ -1,5 +1,6 @@
 import { Container, SectionHeading } from "@/components/ui";
 import { WorkCard } from "@/components/cards";
+import { PdfLink } from "@/components/ResumeModal";
 import { createMetadata } from "@/lib/seo";
 import { caseStudies, roles } from "@/content/work";
 
@@ -36,15 +37,7 @@ export default function WorkPage() {
               {role.links?.length ? (
                 <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                   {role.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="text-sm text-accent underline decoration-accent/30 underline-offset-4"
-                      target="_blank"
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                    >
-                      {link.label}
-                    </a>
+                    <PdfLink key={link.href} href={link.href} label={link.label} />
                   ))}
                 </div>
               ) : null}

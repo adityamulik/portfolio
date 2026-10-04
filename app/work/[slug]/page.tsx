@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui";
+import { PdfLink } from "@/components/ResumeModal";
 import { createMetadata } from "@/lib/seo";
 import { caseStudies, getCaseStudy } from "@/content/work";
 
@@ -70,9 +71,7 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
                 <ul className="mt-4 space-y-3 text-sm">
                   {item.links.map((link) => (
                     <li key={link.href}>
-                      <a href={link.href} className="text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
-                        {link.label}
-                      </a>
+                      <PdfLink href={link.href} label={link.label} />
                     </li>
                   ))}
                 </ul>
