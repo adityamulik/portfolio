@@ -1,15 +1,6 @@
 [build]
- functions = "./server"
+  command = "npm run build"
+  publish = "out"
 
-[dev]
- functions = "./server"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
+[build.environment]
+  NODE_VERSION = "22"
