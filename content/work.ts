@@ -237,8 +237,8 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Gemini Flash", "Multimodal GenAI", "Python"],
     links: [
       {
-        label: "LinkedIn announcement",
-        href: "https://www.linkedin.com/posts/adityamulik_walmartglobaltechathon-activity-7219282996753805312-kuGx",
+        label: "Winner certificate",
+        href: "/proofs/global-techathon-winner-2024.pdf",
       },
     ],
   },

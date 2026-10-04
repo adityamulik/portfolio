@@ -197,9 +197,20 @@ export const recognition: RecognitionItem[] = [
     date: "July 2024",
     summary:
       "Winning team for a Gemini Flash solution converting unstructured documents into actionable data.",
-    proofLabel: "LinkedIn announcement",
-    proofUrl:
-      "https://www.linkedin.com/posts/adityamulik_walmartglobaltechathon-activity-7219282996753805312-kuGx",
+    proofLabel: "Winner certificate",
+    proofUrl: "/proofs/global-techathon-winner-2024.pdf",
+    featured: false,
+  },
+  {
+    slug: "bravo-award-2025",
+    category: "award",
+    title: "Bravo Award, Engineering Excellence",
+    venue: "Walmart Global Tech",
+    date: "August 2025",
+    summary:
+      "Awarded by the Global CTO and Chief Development Officer for going above and beyond in engineering work.",
+    proofLabel: "Award certificate",
+    proofUrl: "/proofs/bravo-award-2025.pdf",
     featured: false,
   },
 ];
