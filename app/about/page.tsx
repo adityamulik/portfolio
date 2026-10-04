@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Container, SectionHeading } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { education, profile, skillGroups } from "@/content/profile";
 import { createMetadata } from "@/lib/seo";
 
@@ -21,7 +21,9 @@ export default function AboutPage() {
           className="h-72 w-full max-w-xs rounded-lg object-cover object-[center_18%]"
         />
         <div>
-          <SectionHeading eyebrow="About" title={profile.name} description={profile.title} />
+          <p className="eyebrow">About</p>
+          <h1 className="mt-3 font-display text-4xl tracking-tight text-ink">{profile.name}</h1>
+          <p className="mt-4 font-display text-2xl leading-snug text-ink">{profile.title}</p>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">{profile.about}</p>
           <p className="mt-4 text-ink-muted">
             {profile.location}. Email{" "}

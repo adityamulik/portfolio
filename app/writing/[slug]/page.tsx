@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { Container } from "@/components/ui";
+import { formatWritingDate } from "@/lib/dates";
 import { createMetadata } from "@/lib/seo";
 import { getPost, getPublishedPosts } from "@/lib/posts";
 
@@ -36,7 +37,7 @@ export default async function WritingPostPage({ params }: { params: Params }) {
 
   return (
     <Container className="py-16">
-      <p className="text-sm text-ink-muted">{post.date}</p>
+      <p className="text-sm text-ink-muted">{formatWritingDate(post.date)}</p>
       <h1 className="mt-3 max-w-3xl font-display text-5xl tracking-tight text-ink">{post.title}</h1>
       <p className="mt-5 max-w-2xl text-xl text-ink-muted">{post.summary}</p>
       <div className="mt-4 flex flex-wrap gap-2">

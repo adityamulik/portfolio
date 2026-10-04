@@ -1,7 +1,7 @@
 export const profile = {
   name: "Aditya Mulik",
   shortName: "Aditya",
-  title: "Senior Software Engineer, Platform",
+  title: "Senior Software Engineer, Platform and Distributed Systems",
     location: "Northern Virginia",
   email: "aditya.mulik@gmail.com",
   phone: "+1-857-488-1743",
@@ -20,7 +20,7 @@ export const profile = {
 
 export const nav = [
   { href: "/work/", label: "Work" },
-  { href: "/evidence/", label: "Evidence" },
+  { href: "/recognition/", label: "Recognition" },
   { href: "/writing/", label: "Writing" },
   { href: "/about/", label: "About" },
 ];

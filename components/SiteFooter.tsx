@@ -8,7 +8,7 @@ export function SiteFooter() {
       <Container className="flex flex-col gap-6 py-10 text-sm text-foam/70 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-display text-xl text-foam">{profile.name}</p>
-          <p className="mt-2 max-w-md">{profile.title}</p>
+          <p className="mt-2 max-w-md text-foam/85">{profile.title}</p>
         </div>
         <div className="flex flex-wrap gap-5">
           <a href={`mailto:${profile.email}`} className="hover:text-foam">

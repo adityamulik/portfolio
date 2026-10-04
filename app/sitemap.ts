@@ -6,7 +6,7 @@ export const dynamic = "force-static";
 
 export default function sitemap() {
   const base = profile.website;
-  const staticRoutes = ["", "/work/", "/evidence/", "/writing/", "/about/"].map((path) => ({
+  const staticRoutes = ["", "/work/", "/recognition/", "/writing/", "/about/"].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
   }));
