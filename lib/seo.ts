@@ -6,14 +6,16 @@ export function createMetadata({
   title,
   description,
   path = "/",
+  absolute = false,
 }: {
   title: string;
   description: string;
   path?: string;
+  absolute?: boolean;
 }): Metadata {
   const url = `${siteUrl}${path}`;
   return {
-    title,
+    title: absolute ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {

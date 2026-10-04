@@ -15,6 +15,7 @@ export const metadata = createMetadata({
   title: `${profile.name} · ${profile.title}`,
   description: profile.tagline,
   path: "/",
+  absolute: true,
 });
 
 export default function HomePage() {
@@ -25,10 +26,12 @@ export default function HomePage() {
       <section className="bg-navy text-foam">
         <Container className="grid gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
-            <p className="eyebrow">{profile.title}</p>
-            <h1 className="mt-5 font-display text-5xl leading-tight tracking-tight text-foam sm:text-6xl">
+            <h1 className="font-display text-5xl leading-tight tracking-tight text-foam sm:text-6xl">
               {profile.name}
             </h1>
+            <p className="mt-4 max-w-2xl font-display text-2xl leading-snug text-foam/85">
+              {profile.title}
+            </p>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-foam/70">{profile.tagline}</p>
             <p className="mt-5 max-w-xl text-foam/70">{profile.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
