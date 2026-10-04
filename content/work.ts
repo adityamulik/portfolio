@@ -19,6 +19,7 @@ export type CaseStudy = {
   impact: string[];
   stack: string[];
   links?: { label: string; href: string }[];
+  codeNote?: string;
 };
 
 export const roles: Role[] = [
@@ -110,7 +111,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "store-agentic-platform",
     title: "Store Agentic Platform",
-    eyebrow: "AI platform",
+    eyebrow: "Walmart Global Tech",
     dates: "Feb 2026 - Present",
     summary:
       "Natural-language workflows and multimodal agents that put live store data in one place for associates. Voice, vision and text on Google ADK with MCP tools.",
@@ -128,12 +129,13 @@ export const caseStudies: CaseStudy[] = [
       "Now scaling across multiple markets.",
     ],
     stack: ["Google ADK", "MCP", "Agent Skills", "Vertex AI (Gemini)", "Python"],
+    codeNote: "Internal project at Walmart Global Tech.",
   },
   {
     slug: "fresh-waste",
     title: "Fresh waste and inventory forecasting",
-    eyebrow: "AI platform",
-    dates: "2025 - Present",
+    eyebrow: "Walmart Global Tech",
+    dates: "2025 - Feb 2026",
     summary:
       "Multi-agent time-series forecasting for fresh produce. Agents check live inventory, weather and related signals so stores waste less and keep shelves accurate.",
     featured: true,
@@ -150,12 +152,13 @@ export const caseStudies: CaseStudy[] = [
       "Waste and availability sit on a shared platform, not a one-off notebook.",
     ],
     stack: ["Google ADK", "Multi-agent orchestration", "Time-series forecasting", "Vertex AI", "Python"],
+    codeNote: "Internal project at Walmart Global Tech.",
   },
   {
     slug: "graphql-federation",
     title: "Federated GraphQL and data ingestion",
-    eyebrow: "Tier-0 platform",
-    dates: "2023 - Present",
+    eyebrow: "Walmart Global Tech",
+    dates: "Jan 2023 - June 2025",
     summary:
       "GraphQL federation across 30+ providers, ingestion for billions of events and a read-through cache so tier-0 traffic stays fast for millions of users.",
     featured: true,
@@ -182,6 +185,7 @@ export const caseStudies: CaseStudy[] = [
       "Spring Boot",
       "Kubernetes",
     ],
+    codeNote: "Internal project at Walmart Global Tech.",
   },
   {
     slug: "ansible-memsource",
@@ -260,6 +264,7 @@ export const caseStudies: CaseStudy[] = [
       "Replaced a manual metadata workflow with a productized interface.",
     ],
     stack: ["Python", "JavaScript", "REST APIs"],
+    codeNote: "Freelance client project.",
   },
 ];
 
