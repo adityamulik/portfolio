@@ -97,8 +97,8 @@ export const recognition: RecognitionItem[] = [
     date: "March 2025",
     summary:
       "Judged a 600+ participant in-person hackathon supporting Intellibus expansion in Jamaica. Listed on the event Devpost.",
-    proofLabel: "Invitation letter",
-    proofUrl: "/proofs/Intellibus_Hackathon_Invitation.pdf",
+    proofLabel: "Devpost judges list",
+    proofUrl: "https://intellibus-hackathon-2025.devpost.com/",
     featured: true,
   },
   {
