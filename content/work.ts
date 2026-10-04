@@ -264,6 +264,7 @@ export const caseStudies: CaseStudy[] = [
       "Replaced a manual metadata workflow with a productized interface.",
     ],
     stack: ["Python", "JavaScript", "REST APIs"],
+    codeNote: "Freelance client project.",
   },
 ];
 
