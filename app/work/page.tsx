@@ -33,6 +33,21 @@ export default function WorkPage() {
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
+              {role.links?.length ? (
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                  {role.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="text-sm text-accent underline decoration-accent/30 underline-offset-4"
+                      target="_blank"
+                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </li>
         ))}

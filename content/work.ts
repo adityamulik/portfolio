@@ -4,6 +4,7 @@ export type Role = {
   location: string;
   dates: string;
   bullets: string[];
+  links?: { label: string; href: string }[];
 };
 
 export type CaseStudy = {
@@ -58,6 +59,12 @@ export const roles: Role[] = [
     dates: "Sept 2021 - Dec 2022",
     bullets: [
       "Served as Teaching Assistant to Professor Daniel Peters for CSYE 7374 (Design Patterns) and CSYE 6200 (Object-Oriented Design).",
+    ],
+    links: [
+      {
+        label: "Recommendation letter",
+        href: "/proofs/daniel-peters-recommendation.pdf",
+      },
     ],
   },
   {
