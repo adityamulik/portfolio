@@ -26,9 +26,14 @@ export default function AboutPage() {
           <p className="mt-4 font-display text-2xl leading-snug text-ink">{profile.title}</p>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">{profile.about}</p>
           <p className="mt-4 text-ink-muted">
-            {profile.location}. Email{" "}
-            <a className="text-accent underline underline-offset-4" href={`mailto:${profile.email}`}>
-              {profile.email}
+            {profile.location}. Reach me on{" "}
+            <a
+              className="text-accent underline underline-offset-4"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
             </a>
             .
           </p>
