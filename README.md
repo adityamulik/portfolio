@@ -25,7 +25,7 @@ writes a static site to `out/`.
 
 ## Writing (internal)
 
-The `/writing` page has two sections: **Elsewhere** (venues like InfoQ, from `content/external-writing.ts`) and **Notes** (markdown in `content/writing/`). Notes stay blank until you add a published `.md` file.
+The `/writing` page has two sections: **Elsewhere** (venues like InfoQ, from `content/external-writing.ts`) and **Notes** (Markdown in `content/writing/`). Notes stay blank until you add a published `.md` file.
 
 ```yaml
 ---
