@@ -213,6 +213,18 @@ export const recognition: RecognitionItem[] = [
     proofUrl: "/proofs/bravo-award-2025.pdf",
     featured: false,
   },
+  {
+    slug: "bravo-award-2023",
+    category: "award",
+    title: "Bravo Award, Operational Excellence",
+    venue: "Walmart Global Tech",
+    date: "June 2023",
+    summary:
+      "Awarded by the Global CTO and Chief Development Officer for going above and beyond in operational work.",
+    proofLabel: "Award certificate",
+    proofUrl: "/proofs/bravo-award-2023.pdf",
+    featured: false,
+  },
 ];
 
 export const featuredRecognition = recognition.filter((item) => item.featured);
