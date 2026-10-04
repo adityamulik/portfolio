@@ -11,9 +11,6 @@ export function SiteFooter() {
           <p className="mt-2 max-w-md text-foam/85">{profile.title}</p>
         </div>
         <div className="flex flex-wrap gap-5">
-          <a href={`mailto:${profile.email}`} className="hover:text-foam">
-            Email
-          </a>
           <a href={profile.linkedin} className="hover:text-foam" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
