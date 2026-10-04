@@ -15,6 +15,7 @@ export type RecognitionItem = {
   summary: string;
   proofLabel?: string;
   proofUrl?: string;
+  extraProofs?: { label: string; url: string }[];
   featured: boolean;
 };
 
@@ -47,9 +48,15 @@ export const recognition: RecognitionItem[] = [
     venue: "PlatformCon",
     date: "2026",
     summary:
-      "Invited speaker at PlatformCon, the main conference for platform engineers. Public speaker listing.",
+      "Invited speaker at PlatformCon, the main conference for platform engineers. Public speaker listing plus a confirmation letter from Platform Engineering.",
     proofLabel: "PlatformCon speaker page",
     proofUrl: "https://2026.platformcon.com/speakers/aditya-mulik",
+    extraProofs: [
+      {
+        label: "Confirmation letter",
+        url: "/proofs/platformcon-2026-confirmation.pdf",
+      },
+    ],
     featured: true,
   },
   {
@@ -120,6 +127,18 @@ export const recognition: RecognitionItem[] = [
     summary: "Invited to judge Virginia Tech's hackathon.",
     proofLabel: "Invitation letter",
     proofUrl: "/proofs/VTHacks25_Judge.pdf",
+    featured: false,
+  },
+  {
+    slug: "neu-ta-peters",
+    category: "mentoring",
+    title: "Teaching Assistant, graduate software design",
+    venue: "Northeastern University",
+    date: "Sept 2021 - Dec 2022",
+    summary:
+      "TA for three semesters of graduate Object-Oriented Design and Design Patterns under Professor Daniel Peters.",
+    proofLabel: "Recommendation letter",
+    proofUrl: "/proofs/daniel-peters-recommendation.pdf",
     featured: false,
   },
   {
