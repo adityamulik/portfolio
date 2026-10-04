@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-stone: #edd9c0;
-  --color-band: #e0c49e;
-  --color-paper: #f6e6d0;
-  --color-ink: #241c14;
-  --color-ink-muted: #5a4634;
-  --color-accent: #b45a28;
-  --font-sans: var(--font-source), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
+  --color-stone: #07080f;
+  --color-band: #10121c;
+  --color-paper: #151826;
+  --color-ink: #f3f4f8;
+  --color-ink-muted: #9aa3b8;
+  --color-accent: #7c5cff;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -23,11 +23,12 @@ body {
 
 .eyebrow {
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-accent);
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-accent) 28%, white);
+  background: color-mix(in srgb, var(--color-accent) 40%, black);
+  color: white;
 }

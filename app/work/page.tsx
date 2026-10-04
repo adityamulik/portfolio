@@ -5,7 +5,7 @@ import { caseStudies, roles } from "@/content/work";
 
 export const metadata = createMetadata({
   title: "Work",
-  description: "Experience and case studies spanning production AI systems and distributed platforms.",
+  description: "Experience and case studies spanning AI platforms and distributed systems.",
   path: "/work/",
 });
 
@@ -15,7 +15,7 @@ export default function WorkPage() {
       <SectionHeading
         eyebrow="Work"
         title="Experience, then the systems behind it."
-        description="Roles match the resume. Case studies unpack the production impact without dressing the page as an employer brand site."
+        description="Roles match the resume. Case studies unpack the platform work behind them."
       />
 
       <ol className="mt-14 space-y-10">
@@ -40,7 +40,7 @@ export default function WorkPage() {
 
       <div className="mt-20">
         <h2 className="font-display text-3xl text-ink">Case studies</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="mt-8 grid items-stretch gap-5 md:grid-cols-2">
           {caseStudies.map((item) => (
             <WorkCard key={item.slug} item={item} />
           ))}

@@ -17,7 +17,7 @@ const components: Components = {
     const block = className?.includes("language-");
     if (block) {
       return (
-        <code className="block overflow-x-auto rounded-xl bg-ink px-4 py-3 text-sm text-stone">
+        <code className="block overflow-x-auto rounded-md bg-stone px-4 py-3 text-sm text-ink">
           {children}
         </code>
       );

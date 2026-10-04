@@ -1,12 +1,12 @@
 # Aditya Mulik
 
-Personal site for hiring managers and a public evidence record of production AI/ML and distributed-systems work.
+Personal site for hiring managers and a public evidence record of platform engineering work.
 
-Live production currently deploys from `main`. This rebuild lives on a feature branch until it is merged.
+Production currently deploys from `main`. This rebuild lives on a feature branch until it is merged.
 
 ## Stack
 
-Next.js (App Router) · TypeScript · Tailwind CSS · static export to `out/` for Netlify.
+Next.js (App Router), TypeScript, Tailwind CSS, static export to `out/` for Netlify.
 
 ## Local
 
@@ -23,9 +23,9 @@ npm run build
 
 writes a static site to `out/`.
 
-## Writing
+## Writing (internal)
 
-Add `content/writing/your-slug.md`:
+The `/writing` page stays blank until a published post exists. To add one, put a file in `content/writing/`:
 
 ```yaml
 ---
@@ -38,9 +38,7 @@ draft: false
 ---
 ```
 
-`draft: true` keeps a post off the production build.
-
-Experience, case studies, and evidence cards are TypeScript in `content/`.
+`draft: true` keeps a post off the production build. Experience, case studies and evidence live in `content/`.
 
 ## Deploy
 

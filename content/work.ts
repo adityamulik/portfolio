@@ -25,56 +25,57 @@ export const roles: Role[] = [
     company: "Walmart Global Tech",
     title: "Senior Software Engineer",
     location: "Herndon, VA",
-    dates: "Jan 2023 – Present",
+    dates: "Jan 2023 - Present",
     bullets: [
-      "To give store associates a faster way to get work done, built an agentic app (Feb 2026 – present) that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
-      "To support multimodal AI experiences across store products, engineered multi-agent orchestration on Google ADK for the Store Agentic Platform, enabling voice, vision, and text conversations and giving associates real-time store information in one place.",
-      "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus data-ingestion pipelines with a read-through cache, delivering low-latency, tier-0 availability (99.999%) for millions of users on a path that is critical to the business.",
+      "To give store associates a faster way to get work done, built an agentic app (Feb 2026 - present) that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
+      "To support multimodal AI across store products, engineered multi-agent orchestration on Google ADK for the Store Agentic Platform, enabling voice, vision and text conversations and giving associates real-time store information in one place.",
+      "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus ingestion pipelines with a read-through cache, delivering low-latency tier-0 availability (99.999%) for millions of users. Early work on this path included associate clock-in status for 5000+ stores and about 3 million associates.",
+      "To improve Fresh produce inventory accuracy, built a multi-agent workflow that combines time-series forecasting with live inventory status, weather and related signals so stores waste less and stock what they actually need.",
     ],
   },
   {
     company: "Red Hat",
     title: "Software Engineering Intern",
     location: "Boston, MA",
-    dates: "May 2022 – Aug 2022",
+    dates: "May 2022 - Aug 2022",
     bullets: [
-      "To help global enterprise users adopt Ansible products in their own languages, co-developed the official Ansible–Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
+      "To help global enterprise users adopt Ansible products in their own languages, co-developed the official Ansible Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
     ],
   },
   {
     company: "Northeastern University",
     title: "Teaching Assistant",
     location: "Boston, MA",
-    dates: "Sept 2021 – Dec 2022",
+    dates: "Sept 2021 - Dec 2022",
     bullets: [
-      "To support graduate students in core software design courses, served as Teaching Assistant to Professor Daniel Peters for CSYE 7374 (Design Patterns) and CSYE 6200 (Object-Oriented Design).",
+      "Served as Teaching Assistant to Professor Daniel Peters for CSYE 7374 (Design Patterns) and CSYE 6200 (Object-Oriented Design).",
     ],
   },
   {
     company: "Adnet Global",
     title: "Python Developer",
     location: "Remote, India (part-time freelance)",
-    dates: "May 2021 – Sept 2021",
+    dates: "May 2021 - Sept 2021",
     bullets: [
-      "To streamline client onboarding for a software solution, built automated setup workflows on top of its API endpoints.",
+      "Built automated setup workflows on top of API endpoints to speed up client onboarding.",
     ],
   },
   {
     company: "Decimal Point Analytics",
     title: "Python Programmer",
     location: "Remote, India",
-    dates: "June 2020 – Sept 2021",
+    dates: "June 2020 - Sept 2021",
     bullets: [
-      "To help clients turn raw data into meaningful insights, built interactive data visualizations, web applications, and automation scripts using Python and JavaScript libraries.",
+      "Built interactive data visualizations, web applications and automation scripts using Python and JavaScript libraries.",
     ],
   },
   {
     company: "Intertrust Group (CSC)",
     title: "Python / Linux Administrator",
     location: "Mumbai, India",
-    dates: "Sept 2016 – June 2020",
+    dates: "Sept 2016 - June 2020",
     bullets: [
-      "To reduce manual operations overhead supporting hedge fund clients, automated recurring Linux administration tasks with Python scripts, eliminating routine human intervention across hundreds of workflows.",
+      "Automated recurring Linux administration tasks with Python scripts, cutting routine human intervention across hundreds of workflows for hedge fund clients.",
     ],
   },
 ];
@@ -83,46 +84,68 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "store-agentic-platform",
     title: "Store Agentic Platform",
-    eyebrow: "Production multi-agent systems",
-    dates: "Feb 2026 – Present",
+    eyebrow: "AI platform",
+    dates: "Feb 2026 - Present",
     summary:
-      "Natural-language workflows and multimodal agents that put real-time store data in one place for associates—voice, vision, and text—on Google ADK with MCP tools.",
+      "Natural-language workflows and multimodal agents that put live store data in one place for associates. Voice, vision and text on Google ADK with MCP tools.",
     featured: true,
     problem:
-      "Store associates needed a faster way to get work done without hopping across tools to look up operational data. Product surfaces also needed multimodal AI (voice, vision, and text) grounded in the same live store context.",
+      "Associates were bouncing between tools to look up operational data. Store products also needed voice, vision and text on the same live context.",
     approach: [
-      "Started this work in February 2026: an agentic application that turns natural language into automated workflows, calling real-time store data through MCP tools and skills.",
-      "Engineered multi-agent orchestration on Google ADK so specialized agents can collaborate instead of stuffing everything into a single prompt.",
-      "Treated grounding, tool contracts, and failure recovery as platform concerns so the same patterns can scale across markets and store products.",
+      "Started in February 2026. Built an agentic app that turns natural language into workflows, calling live store data through MCP tools and skills.",
+      "Orchestrated specialized agents on Google ADK instead of stuffing everything into one prompt.",
+      "Treated grounding, tool contracts and failure recovery as platform concerns so other store products can reuse the same layer.",
     ],
     impact: [
-      "Reduced manual data lookup by 80%.",
+      "Cut manual data lookup by 80%.",
       "Now scaling across multiple markets.",
-      "Associates get real-time store information in one conversational surface.",
+      "Associates get store information in one conversational surface.",
     ],
     stack: ["Google ADK", "MCP", "Agent Skills", "Vertex AI (Gemini)", "Python"],
   },
   {
-    slug: "graphql-federation",
-    title: "Federated GraphQL and data ingestion",
-    eyebrow: "Tier-0 distributed systems",
-    dates: "2023 – Present",
+    slug: "fresh-waste",
+    title: "Fresh waste and inventory forecasting",
+    eyebrow: "AI platform",
+    dates: "2025 - Present",
     summary:
-      "A GraphQL federation layer across 30+ providers, paired with ingestion pipelines and a read-through cache so tier-0 traffic stays low-latency for millions of users.",
+      "Multi-agent time-series forecasting for fresh produce. Agents check live inventory, weather and related signals so stores waste less and keep shelves accurate.",
     featured: true,
     problem:
-      "Critical product experiences sat on fragmented backends. Clients should not have to know which of 30+ providers owned a given slice of data, and the read path had to stay fast even while billions of events were landing. This is tier-0 traffic: if it is slow or down, the business feels it immediately.",
+      "Fresh produce is perishable. Forecasts that ignore live inventory and weather go stale fast, which shows up as waste on one side and empty shelves on the other.",
     approach: [
-      "Built a federated GraphQL gateway (Apollo) so each domain team could publish a subgraph while clients queried one graph.",
-      "Paired the gateway with high-throughput data-ingestion pipelines for billions of events.",
-      "Added a read-through cache on the hot path so repeated reads do not wait on every provider, keeping latency low for the requests that matter most.",
-      "Held the path to five nines: this is a business-critical, tier-0 surface, not a sidecar experiment.",
+      "Built a multi-agent setup on the Fresh insights platform instead of a single forecasting job.",
+      "One path watches live inventory. Another pulls weather and related signals. Another produces the time-series forecast those inputs should change.",
+      "Wired the agents into the same operational data plane the rest of store products already use.",
+    ],
+    impact: [
+      "Inventory accuracy for fresh produce is no longer a one-model guess.",
+      "Stores can react to weather and on-hand stock in the same loop.",
+      "Waste and availability sit on a shared platform, not a one-off notebook.",
+    ],
+    stack: ["Google ADK", "Multi-agent orchestration", "Time-series forecasting", "Vertex AI", "Python"],
+  },
+  {
+    slug: "graphql-federation",
+    title: "Federated GraphQL and data ingestion",
+    eyebrow: "Tier-0 platform",
+    dates: "2023 - Present",
+    summary:
+      "GraphQL federation across 30+ providers, ingestion for billions of events and a read-through cache so tier-0 traffic stays fast for millions of users.",
+    featured: true,
+    problem:
+      "Product teams were calling fragmented backends. Clients should not care which of 30+ providers owns a field. The read path still has to stay fast while billions of events land. If this path is slow, store operations feel it.",
+    approach: [
+      "Built a federated GraphQL gateway (Apollo) so each domain publishes a subgraph and clients query one graph.",
+      "Paired it with high-throughput ingestion for billions of events.",
+      "Added a read-through cache on the hot path so repeated reads do not wait on every provider.",
+      "This is the same class of work that started with associate clock-in status for 5000+ stores and about 3 million associates: 99.999% uptime because store operations run on it.",
     ],
     impact: [
       "30+ providers behind one graph.",
-      "Read-through cache for low-latency reads on ingested data.",
+      "Read-through cache for low-latency reads.",
       "Billions of events on the ingestion path.",
-      "99.999% availability for millions of users on a tier-0, business-critical path.",
+      "99.999% availability for millions of users on a tier-0 path.",
     ],
     stack: [
       "GraphQL Federation (Apollo)",
@@ -136,18 +159,18 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "ansible-memsource",
-    title: "Ansible–Memsource collection",
+    title: "Ansible Memsource collection",
     eyebrow: "Red Hat",
-    dates: "May 2022 – Aug 2022",
+    dates: "May 2022 - Aug 2022",
     summary:
-      "Ansible collection that automates the end-to-end localization pipeline through the Memsource API—2,000+ downloads on Ansible Galaxy.",
+      "Ansible collection that automates the localization pipeline through the Memsource API. 2,000+ downloads on Ansible Galaxy.",
     featured: true,
     problem:
-      "Global enterprise users needed Ansible products in their own languages. Localization was a manual, tool-specific process that did not look like the rest of Ansible Automation Platform.",
+      "Enterprise users needed Ansible products in their own languages. Localization did not look like the rest of Ansible Automation Platform.",
     approach: [
-      "Co-developed the ansible.memsource collection so localization workflows are expressed as Ansible-native automation.",
-      "Used the Memsource translation API to automate the end-to-end pipeline, not just a single API call.",
-      "Shipped companion Python bindings so the same API could be used outside playbooks.",
+      "Co-developed the ansible.memsource collection so localization is ordinary Ansible automation.",
+      "Used the Memsource translation API for the full pipeline, not a single call.",
+      "Shipped companion Python bindings so the same API works outside playbooks.",
     ],
     impact: [
       "2,000+ downloads on Ansible Galaxy.",
@@ -167,19 +190,19 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "techathon-gemini",
     title: "Walmart Global Techathon 2024",
-    eyebrow: "Winning team · multimodal GenAI",
+    eyebrow: "Winning team",
     dates: "June 2024",
     summary:
-      "Led a winning team project using Gemini Flash for image-to-text conversion—end-to-end solution, technical execution, and presentation.",
+      "Led a winning team using Gemini Flash for image-to-text conversion. Designed the end-to-end solution and ran technical execution and the presentation.",
     featured: false,
     problem:
-      "Unstructured documents (including bills of lading and similar artifacts) still required slow, error-prone human transcription before they could enter operational systems.",
+      "Unstructured documents still needed slow human transcription before they could enter operational systems.",
     approach: [
       "Led a winning team using Gemini Flash multimodal GenAI for image-to-text conversion.",
       "Designed the end-to-end solution and drove technical execution and presentation under hackathon constraints.",
     ],
     impact: [
-      "First-place outcome in a global internal competition among hundreds of teams.",
+      "First place in a global internal competition among hundreds of teams.",
     ],
     stack: ["Gemini Flash", "Multimodal GenAI", "Python"],
     links: [
@@ -192,15 +215,15 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "iptc-automation",
     title: "IPTC automation",
-    eyebrow: "Freelance product work",
-    dates: "May 2021 – Sept 2021",
+    eyebrow: "Freelance",
+    dates: "May 2021 - Sept 2021",
     summary:
-      "Full-stack application that automated adding metadata to images through a simple web interface, built while consulting as a Python developer.",
+      "Full-stack application that automated adding metadata to images through a simple web interface.",
     featured: false,
     problem:
-      "Image metadata (IPTC) was being applied through a slow, manual process that did not scale with the client’s catalog.",
+      "Image metadata was applied by hand and did not keep up with the catalog.",
     approach: [
-      "Built a full-stack web application so operators could apply metadata through a UI instead of one-off scripts.",
+      "Built a web application so operators could apply metadata through a UI.",
       "Automated setup workflows on API endpoints as part of client onboarding.",
     ],
     impact: [

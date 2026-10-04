@@ -31,13 +31,13 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={profile.resumePath}
-                className="rounded-full bg-ink px-5 py-2.5 text-sm text-stone transition hover:bg-accent"
+                className="rounded-md bg-accent px-5 py-2.5 text-sm text-white transition hover:brightness-110"
               >
                 Download resume
               </a>
               <a
                 href={profile.linkedin}
-                className="rounded-full border border-ink/15 px-5 py-2.5 text-sm text-ink hover:border-accent"
+                className="rounded-md border border-ink/15 px-5 py-2.5 text-sm text-ink hover:border-accent"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -45,7 +45,7 @@ export default function HomePage() {
               </a>
               <a
                 href={profile.github}
-                className="rounded-full border border-ink/15 px-5 py-2.5 text-sm text-ink hover:border-accent"
+                className="rounded-md border border-ink/15 px-5 py-2.5 text-sm text-ink hover:border-accent"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -59,12 +59,12 @@ export default function HomePage() {
             width={720}
             height={480}
             priority
-            className="h-[22rem] w-full rounded-3xl object-cover object-[center_22%] shadow-sm"
+            className="h-[22rem] w-full rounded-lg object-cover object-[center_22%]"
           />
         </Container>
       </section>
 
-      <section className="bg-band/60">
+      <section className="bg-band">
         <Container className="grid gap-8 py-14 sm:grid-cols-2 lg:grid-cols-4">
           {impactStats.map((stat) => (
             <div key={stat.label}>
@@ -81,14 +81,14 @@ export default function HomePage() {
           <div className="flex items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Selected work"
-              title="Production systems, not slideware."
-              description="Case studies drawn from the same bullets as the resume: agentic store workflows and federation at retail scale."
+              title="Platforms other teams ship on"
+              description="Four pieces of shared infrastructure: agents, Fresh forecasting, federation and localization automation."
             />
             <Link href="/work/" className="hidden shrink-0 text-sm text-accent sm:block">
-              All work →
+              All work
             </Link>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2">
             {featuredCaseStudies.map((item) => (
               <WorkCard key={item.slug} item={item} />
             ))}
@@ -96,19 +96,19 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-band/50">
+      <section className="bg-band">
         <Container className="py-20">
           <div className="flex items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Evidence"
-              title="Independent proof of the work."
-              description="Speaking, judging, publications, and awards—each with an outbound record a hiring manager or petition reviewer can open."
+              title="Talks, judging and writing you can verify"
+              description="Outbound links a hiring manager or petition reviewer can open without this site."
             />
             <Link href="/evidence/" className="hidden shrink-0 text-sm text-accent sm:block">
-              Full record →
+              Full record
             </Link>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2">
             {featuredEvidence.slice(0, 4).map((item) => (
               <EvidenceCard key={item.slug} item={item} />
             ))}
@@ -116,19 +116,18 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section>
-        <Container className="py-20">
-          <SectionHeading eyebrow="Writing" title="Notes from the platform layer." />
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
-          <Link href="/writing/" className="mt-8 inline-block text-sm text-accent">
-            All writing →
-          </Link>
-        </Container>
-      </section>
+      {posts.length > 0 ? (
+        <section>
+          <Container className="py-20">
+            <SectionHeading eyebrow="Writing" title="Writing" />
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              {posts.map((post) => (
+                <PostCard key={post.slug} post={post} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
     </>
   );
 }

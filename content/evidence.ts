@@ -1,4 +1,10 @@
-export type EvidenceCategory = "publication" | "speaking" | "judging" | "award";
+export type EvidenceCategory =
+  | "publication"
+  | "speaking"
+  | "judging"
+  | "mentoring"
+  | "contribution"
+  | "award";
 
 export type EvidenceItem = {
   slug: string;
@@ -16,20 +22,34 @@ export const evidenceCategories: { id: EvidenceCategory; label: string }[] = [
   { id: "publication", label: "Publications" },
   { id: "speaking", label: "Speaking" },
   { id: "judging", label: "Judging" },
+  { id: "mentoring", label: "Mentoring" },
+  { id: "contribution", label: "Original contributions" },
   { id: "award", label: "Awards" },
 ];
 
 export const evidence: EvidenceItem[] = [
   {
-    slug: "infoq-platforms-for-llms",
+    slug: "infoq-platform-playbook",
     category: "publication",
-    title: "Platforms for LLMs",
+    title: "A Platform Engineering Playbook for Production LLMs",
     venue: "InfoQ",
-    date: "2025",
+    date: "2026",
     summary:
-      "Professional article on the platform primitives required to run large language model systems in production—not a demo notebook, a platform.",
-    proofLabel: "Replace with InfoQ article URL",
-    proofUrl: "https://www.infoq.com/",
+      "Published article on InfoQ about the platform layer required to run LLM systems in production. Independent editorial venue.",
+    proofLabel: "InfoQ article",
+    proofUrl: "https://www.infoq.com/articles/platform-engineering-playbook-production-llms/",
+    featured: true,
+  },
+  {
+    slug: "platformcon-2026",
+    category: "speaking",
+    title: "Speaker, PlatformCon 2026",
+    venue: "PlatformCon",
+    date: "2026",
+    summary:
+      "Invited speaker at PlatformCon, the main conference for platform engineers. Public speaker listing.",
+    proofLabel: "PlatformCon speaker page",
+    proofUrl: "https://2026.platformcon.com/speakers/aditya-mulik",
     featured: true,
   },
   {
@@ -39,10 +59,22 @@ export const evidence: EvidenceItem[] = [
     venue: "QCon AI Boston",
     date: "June 2026",
     summary:
-      "Invited talk on production multi-agent orchestration, cost-efficient inference, MCP grounding, and the failure modes that only appear at real workload scale.",
+      "Talk on production multi-agent orchestration, cost-efficient inference, MCP grounding and failure modes that show up at real workload scale.",
     proofLabel: "QCon speaker page",
     proofUrl: "https://boston.qcon.ai/speakers/adityamulik",
     featured: true,
+  },
+  {
+    slug: "mcp-dev-summit",
+    category: "speaking",
+    title: "MCP Dev Summit podcast",
+    venue: "MCP Dev Summit",
+    date: "2026",
+    summary:
+      "Invited to speak on a live MCP Dev Summit podcast about production MCP and agent platforms.",
+    proofLabel: "YouTube recording",
+    proofUrl: "https://www.youtube.com/watch?v=mPcla3P5ObA",
+    featured: false,
   },
   {
     slug: "ai-summit-nyc-2025",
@@ -51,23 +83,121 @@ export const evidence: EvidenceItem[] = [
     venue: "The AI Summit New York",
     date: "December 2025",
     summary:
-      "Speaker at The AI Summit in New York (Javits Center), presenting work on extracting operational value from unstructured data.",
+      "Speaker at The AI Summit in New York on extracting operational value from unstructured data.",
     proofLabel: "LinkedIn announcement",
     proofUrl:
       "https://www.linkedin.com/posts/adityamulik_speakers-activity-7368457228996993025-nwH0",
-    featured: true,
+    featured: false,
   },
   {
     slug: "intellibus-jamaica",
     category: "judging",
     title: "Judge, Intellibus Hackathon 2025",
-    venue: "Kingston, Jamaica · Intellibus",
+    venue: "Kingston, Jamaica",
     date: "March 2025",
     summary:
-      "Evaluated new talent at a 600+ participant in-person hackathon supporting Intellibus expansion in Jamaica. Independent listing on the event’s Devpost.",
+      "Judged a 600+ participant in-person hackathon supporting Intellibus expansion in Jamaica. Listed on the event Devpost.",
     proofLabel: "Devpost judges list",
     proofUrl: "https://intellibus-hackathon-2025.devpost.com/",
     featured: true,
+  },
+  {
+    slug: "gmu-techfair-2026",
+    category: "judging",
+    title: "Judge, George Mason University Tech Fair",
+    venue: "George Mason University",
+    date: "Feb 2026",
+    summary:
+      "Judged a university tech fair. Independent academic judging of student work.",
+    proofLabel: "Timeline record",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    featured: false,
+  },
+  {
+    slug: "vthacks-2025",
+    category: "judging",
+    title: "Judge, VTHacks",
+    venue: "Virginia Tech",
+    date: "2025",
+    summary:
+      "Invited to judge Virginia Tech's hackathon.",
+    proofLabel: "LinkedIn",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    featured: false,
+  },
+  {
+    slug: "neu-hackathon-2024",
+    category: "judging",
+    title: "Judge, Northeastern hackathon",
+    venue: "Northeastern University",
+    date: "2024",
+    summary:
+      "Invited to judge a Northeastern University hackathon.",
+    proofLabel: "LinkedIn",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    featured: false,
+  },
+  {
+    slug: "neu-posters-2024",
+    category: "judging",
+    title: "Judge, academic poster presentations",
+    venue: "Northeastern University",
+    date: "December 2024",
+    summary:
+      "Invited to judge academic poster presentations.",
+    proofLabel: "LinkedIn",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    featured: false,
+  },
+  {
+    slug: "hacknc-2025",
+    category: "mentoring",
+    title: "Mentor, HackNC",
+    venue: "University of North Carolina",
+    date: "2025",
+    summary:
+      "Mentored students at HackNC.",
+    proofLabel: "LinkedIn",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    featured: false,
+  },
+  {
+    slug: "tinytorch-2026",
+    category: "contribution",
+    title: "Featured in TinyTorch v0.1.10",
+    venue: "Harvard Edge / cs249r",
+    date: "2026",
+    summary:
+      "Named in the TinyTorch ML systems lab release, the hands-on curriculum built alongside Harvard cs249r.",
+    proofLabel: "GitHub release (archived)",
+    proofUrl:
+      "https://web.archive.org/web/20260424182327/https://github.com/harvard-edge/cs249r_book/releases/tag/tinytorch-v0.1.10",
+    featured: false,
+  },
+  {
+    slug: "aibom-cisa-2026",
+    category: "contribution",
+    title: "Training-data transparency for AI SBOM",
+    venue: "GenAI Security Project",
+    date: "July 2026",
+    summary:
+      "Merged contribution implementing training-data transparency consistent with CISA/G7 SBOM for AI minimum elements.",
+    proofLabel: "Merged pull request",
+    proofUrl: "https://github.com/GenAI-Security-Project/aibom-generator/pull/81",
+    featured: false,
+  },
+  {
+    slug: "nist-ai-rmf",
+    category: "contribution",
+    title: "NIST AI RMF: AI in critical infrastructure",
+    venue: "NIST",
+    date: "2026",
+    summary:
+      "Contributed to the concept note for an AI RMF profile on trustworthy AI in critical infrastructure.",
+    proofLabel: "NIST program page",
+    proofUrl:
+      "https://www.nist.gov/programs-projects/concept-note-ai-rmf-profile-trustworthy-ai-critical-infrastructure",
+    featured: false,
   },
   {
     slug: "techathon-2024",
@@ -76,22 +206,22 @@ export const evidence: EvidenceItem[] = [
     venue: "Walmart Global Tech",
     date: "July 2024",
     summary:
-      "Winning team for a multimodal Gemini Flash solution converting unstructured documents into actionable data, competing among hundreds of teams globally.",
+      "Winning team for a Gemini Flash solution converting unstructured documents into actionable data.",
     proofLabel: "LinkedIn announcement",
     proofUrl:
       "https://www.linkedin.com/posts/adityamulik_walmartglobaltechathon-activity-7219282996753805312-kuGx",
     featured: false,
   },
   {
-    slug: "bravo-2023",
+    slug: "senior-promotion-2025",
     category: "award",
-    title: "Bravo Award 2023",
+    title: "Promoted to Senior Software Engineer",
     venue: "Walmart Global Tech",
-    date: "May 2023",
+    date: "2025",
     summary:
-      "Internal recognition for engineering impact on platform and associate-facing systems.",
-    proofLabel: "LinkedIn announcement",
-    proofUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7100239153375711232/",
+      "Promotion to Senior Software Engineer, reflecting sustained platform work on store systems.",
+    proofLabel: "LinkedIn",
+    proofUrl: "https://www.linkedin.com/in/adityamulik",
     featured: false,
   },
 ];

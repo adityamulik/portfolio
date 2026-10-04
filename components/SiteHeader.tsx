@@ -21,7 +21,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-stone/80 backdrop-blur-md">
       <Container className="flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 font-display text-sm text-ink">
+          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-accent font-display text-sm font-semibold text-white">
             AM
           </span>
           <span className="hidden text-sm font-medium tracking-wide text-ink sm:block">
@@ -44,14 +44,14 @@ export function SiteHeader() {
           ))}
           <a
             href={profile.resumePath}
-            className="rounded-full border border-ink/15 px-4 py-1.5 text-ink transition hover:border-accent hover:text-accent"
+            className="rounded-md border border-ink/15 px-4 py-1.5 text-ink transition hover:border-accent hover:text-accent"
           >
             Resume
           </a>
         </nav>
         <button
           type="button"
-          className="rounded-full border border-ink/15 px-3 py-1.5 text-sm text-ink md:hidden"
+          className="rounded-md border border-ink/15 px-3 py-1.5 text-sm text-ink md:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
         >

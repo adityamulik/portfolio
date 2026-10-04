@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Source_Sans_3 } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { profile } from "@/content/profile";
 import "./globals.css";
 
-const instrument = Instrument_Serif({
+const grotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-instrument",
+  variable: "--font-grotesk",
 });
 
-const sourceSans = Source_Sans_3({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-source",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${instrument.variable} ${sourceSans.variable}`}>
+    <html lang="en" className={`${grotesk.variable} ${inter.variable}`}>
       <body className="min-h-screen antialiased">
         <SiteHeader />
         <main>{children}</main>

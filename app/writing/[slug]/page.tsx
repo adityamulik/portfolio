@@ -7,7 +7,11 @@ import { getPost, getPublishedPosts } from "@/lib/posts";
 type Params = Promise<{ slug: string }>;
 
 export function generateStaticParams() {
-  return getPublishedPosts().map((post) => ({ slug: post.slug }));
+  const posts = getPublishedPosts();
+  if (posts.length === 0) {
+    return [{ slug: "_" }];
+  }
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }) {

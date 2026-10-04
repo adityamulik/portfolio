@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Evidence",
   description:
-    "Speaking, judging, publications, and awards with independent outbound proof.",
+    "Talks, judging, publications and related records with outbound proof.",
   path: "/evidence/",
 });
 
@@ -16,7 +16,7 @@ export default function EvidencePage() {
       <SectionHeading
         eyebrow="Evidence"
         title="A public record you can verify."
-        description="This page is intentionally boring in the best way: venue, date, short description, and a link a reviewer can open without logging into this site."
+        description="Venue, date, a short note and a link a reviewer can open without this site."
       />
 
       {evidenceCategories.map((category) => {

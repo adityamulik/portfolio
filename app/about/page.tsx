@@ -18,7 +18,7 @@ export default function AboutPage() {
           alt={`${profile.name} speaking at QCon AI`}
           width={420}
           height={560}
-          className="h-72 w-full max-w-xs rounded-2xl object-cover object-[center_18%] shadow-sm"
+          className="h-72 w-full max-w-xs rounded-lg object-cover object-[center_18%]"
         />
         <div>
           <SectionHeading eyebrow="About" title={profile.name} description={profile.title} />
