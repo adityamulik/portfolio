@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { EvidenceCard, PostCard, WorkCard } from "@/components/cards";
 import { Container, SectionHeading } from "@/components/ui";
@@ -19,13 +20,14 @@ export default function HomePage() {
   return (
     <>
       <section className="border-b border-ink/10">
-        <Container className="grid gap-12 py-20 lg:grid-cols-[1.4fr_0.8fr] lg:items-end">
+        <Container className="grid gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
             <p className="eyebrow">{profile.title}</p>
             <h1 className="mt-5 font-display text-5xl leading-tight tracking-tight text-ink sm:text-6xl">
               {profile.name}
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-ink-muted">{profile.tagline}</p>
+            <p className="mt-5 max-w-xl text-ink-muted">{profile.summary}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={profile.resumePath}
@@ -51,7 +53,14 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          <p className="max-w-sm text-ink-muted lg:justify-self-end">{profile.summary}</p>
+          <Image
+            src={profile.photo}
+            alt={`${profile.name} speaking at QCon AI`}
+            width={720}
+            height={480}
+            priority
+            className="h-[22rem] w-full rounded-3xl object-cover object-[center_22%] shadow-sm"
+          />
         </Container>
       </section>
 
@@ -73,7 +82,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Selected work"
               title="Production systems, not slideware."
-              description="Case studies drawn from the same bullets as the resume: agentic store workflows, federation at retail scale, and open-source platform work."
+              description="Case studies drawn from the same bullets as the resume: agentic store workflows and federation at retail scale."
             />
             <Link href="/work/" className="hidden shrink-0 text-sm text-accent sm:block">
               All work →
@@ -93,7 +102,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Evidence"
               title="Independent proof of the work."
-              description="Speaking, judging, publications, and open source—each with an outbound record a hiring manager or petition reviewer can open."
+              description="Speaking, judging, publications, and awards—each with an outbound record a hiring manager or petition reviewer can open."
             />
             <Link href="/evidence/" className="hidden shrink-0 text-sm text-accent sm:block">
               Full record →

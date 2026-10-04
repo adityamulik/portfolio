@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-stone: #f4f1ea;
-  --color-band: #e8e4db;
-  --color-paper: #fbf8f2;
-  --color-ink: #1a1916;
-  --color-ink-muted: #5c574e;
-  --color-accent: #9a6b3f;
+  --color-stone: #edd9c0;
+  --color-band: #e0c49e;
+  --color-paper: #f6e6d0;
+  --color-ink: #241c14;
+  --color-ink-muted: #5a4634;
+  --color-accent: #b45a28;
   --font-sans: var(--font-source), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-instrument), ui-serif, Georgia, serif;
 }

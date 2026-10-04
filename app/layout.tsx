@@ -23,7 +23,6 @@ export const metadata: Metadata = {
     template: `%s · ${profile.name}`,
   },
   description: profile.tagline,
-  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({

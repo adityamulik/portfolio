@@ -6,7 +6,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Evidence",
   description:
-    "Speaking, judging, publications, open source, and awards with independent outbound proof.",
+    "Speaking, judging, publications, and awards with independent outbound proof.",
   path: "/evidence/",
 });
 

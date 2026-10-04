@@ -27,9 +27,9 @@ export const roles: Role[] = [
     location: "Herndon, VA",
     dates: "Jan 2023 – Present",
     bullets: [
-      "To give store associates a faster way to get work done, built an agentic app that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
+      "To give store associates a faster way to get work done, built an agentic app (Feb 2026 – present) that turns natural language into automated workflows using real-time store data via MCP tools and skills, reducing manual data lookup by 80% and now scaling across multiple markets.",
       "To support multimodal AI experiences across store products, engineered multi-agent orchestration on Google ADK for the Store Agentic Platform, enabling voice, vision, and text conversations and giving associates real-time store information in one place.",
-      "To unify fragmented data access, built a federated GraphQL gateway across 70+ providers and ingestion pipelines for billions of events, delivering 99.999% availability for millions of users.",
+      "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus data-ingestion pipelines with a read-through cache, delivering low-latency, tier-0 availability (99.999%) for millions of users on a path that is critical to the business.",
     ],
   },
   {
@@ -38,7 +38,7 @@ export const roles: Role[] = [
     location: "Boston, MA",
     dates: "May 2022 – Aug 2022",
     bullets: [
-      "To help global enterprise users adopt open-source Ansible products in their own languages, co-developed the official Ansible–Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
+      "To help global enterprise users adopt Ansible products in their own languages, co-developed the official Ansible–Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
     ],
   },
   {
@@ -84,14 +84,14 @@ export const caseStudies: CaseStudy[] = [
     slug: "store-agentic-platform",
     title: "Store Agentic Platform",
     eyebrow: "Production multi-agent systems",
-    dates: "2023 – Present",
+    dates: "Feb 2026 – Present",
     summary:
       "Natural-language workflows and multimodal agents that put real-time store data in one place for associates—voice, vision, and text—on Google ADK with MCP tools.",
     featured: true,
     problem:
       "Store associates needed a faster way to get work done without hopping across tools to look up operational data. Product surfaces also needed multimodal AI (voice, vision, and text) grounded in the same live store context.",
     approach: [
-      "Built an agentic application that turns natural language into automated workflows, calling real-time store data through MCP tools and skills.",
+      "Started this work in February 2026: an agentic application that turns natural language into automated workflows, calling real-time store data through MCP tools and skills.",
       "Engineered multi-agent orchestration on Google ADK so specialized agents can collaborate instead of stuffing everything into a single prompt.",
       "Treated grounding, tool contracts, and failure recovery as platform concerns so the same patterns can scale across markets and store products.",
     ],
@@ -104,75 +104,63 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "graphql-federation",
-    title: "Federated GraphQL gateway",
-    eyebrow: "Distributed systems at retail scale",
+    title: "Federated GraphQL and data ingestion",
+    eyebrow: "Tier-0 distributed systems",
     dates: "2023 – Present",
     summary:
-      "A GraphQL federation layer across 70+ providers and ingestion pipelines for billions of events, held to 99.999% availability for millions of users.",
+      "A GraphQL federation layer across 30+ providers, paired with ingestion pipelines and a read-through cache so tier-0 traffic stays low-latency for millions of users.",
     featured: true,
     problem:
-      "Critical product experiences depended on fragmented backends. Clients should not have to know which of 70+ providers owned a given slice of data, and the ingestion path had to absorb billions of events without becoming a single point of failure.",
+      "Critical product experiences sat on fragmented backends. Clients should not have to know which of 30+ providers owned a given slice of data, and the read path had to stay fast even while billions of events were landing. This is tier-0 traffic: if it is slow or down, the business feels it immediately.",
     approach: [
       "Built a federated GraphQL gateway (Apollo) so each domain team could publish a subgraph while clients queried one graph.",
-      "Paired the gateway with high-throughput ingestion pipelines for billions of events.",
-      "Designed for the availability number the business actually needed: five nines on the path that millions of users hit.",
+      "Paired the gateway with high-throughput data-ingestion pipelines for billions of events.",
+      "Added a read-through cache on the hot path so repeated reads do not wait on every provider, keeping latency low for the requests that matter most.",
+      "Held the path to five nines: this is a business-critical, tier-0 surface, not a sidecar experiment.",
     ],
     impact: [
-      "70+ providers behind one graph.",
+      "30+ providers behind one graph.",
+      "Read-through cache for low-latency reads on ingested data.",
       "Billions of events on the ingestion path.",
-      "99.999% availability for millions of users.",
+      "99.999% availability for millions of users on a tier-0, business-critical path.",
     ],
-    stack: ["GraphQL Federation (Apollo)", "Kafka", "Java", "Spring Boot", "Kubernetes"],
+    stack: [
+      "GraphQL Federation (Apollo)",
+      "Kafka",
+      "Read-through cache",
+      "Memcached",
+      "Java",
+      "Spring Boot",
+      "Kubernetes",
+    ],
   },
   {
     slug: "ansible-memsource",
     title: "Ansible–Memsource collection",
-    eyebrow: "Open source · Red Hat",
+    eyebrow: "Red Hat",
     dates: "May 2022 – Aug 2022",
     summary:
-      "Official Ansible collection that automates the end-to-end localization pipeline through the Memsource API—2,000+ downloads on Ansible Galaxy.",
+      "Ansible collection that automates the end-to-end localization pipeline through the Memsource API—2,000+ downloads on Ansible Galaxy.",
     featured: true,
     problem:
       "Global enterprise users needed Ansible products in their own languages. Localization was a manual, tool-specific process that did not look like the rest of Ansible Automation Platform.",
     approach: [
-      "Co-developed the official ansible.memsource collection so localization workflows are expressed as Ansible-native automation.",
+      "Co-developed the ansible.memsource collection so localization workflows are expressed as Ansible-native automation.",
       "Used the Memsource translation API to automate the end-to-end pipeline, not just a single API call.",
-      "Designed the collection to be generic enough for products inside and outside Red Hat.",
+      "Shipped companion Python bindings so the same API could be used outside playbooks.",
     ],
     impact: [
       "2,000+ downloads on Ansible Galaxy.",
-      "Shipped as official Red Hat / Ansible open source (Apache 2.0).",
     ],
     stack: ["Python", "Ansible", "YAML", "Memsource API"],
     links: [
       {
-        label: "github.com/ansible/ansible-collection-memsource",
-        href: "https://github.com/ansible/ansible-collection-memsource",
+        label: "Ansible Galaxy · ansible.memsource",
+        href: "https://galaxy.ansible.com/ui/repo/published/ansible/memsource/",
       },
-    ],
-  },
-  {
-    slug: "llm-platform-primitives",
-    title: "LLM platform primitives",
-    eyebrow: "Open source reference",
-    dates: "2025 – Present",
-    summary:
-      "Open-source Python reference for the primitives that turn one-off LLM apps into shared infrastructure: intent classification, prompt versioning, token accounting, and MCP server integration.",
-    featured: true,
-    problem:
-      "Most LLM apps start as a notebook and a prompt file. Production platforms need shared primitives—intent, versioning, accounting, and tool servers—that more than one team can run.",
-    approach: [
-      "Published a Python reference implementation covering intent classification, prompt versioning, token accounting, and MCP server integration.",
-      "Prototyped on Google ADK with local models via Ollama so the same ideas can be exercised without a cloud bill.",
-    ],
-    impact: [
-      "A inspectable, reusable starting point for platform teams rather than another chatbot demo.",
-    ],
-    stack: ["Python", "Google ADK", "MCP", "Ollama"],
-    links: [
       {
-        label: "github.com/adityamulik/mcp-production-toolkit",
-        href: "https://github.com/adityamulik/mcp-production-toolkit",
+        label: "github.com/ansible/python-memsource",
+        href: "https://github.com/ansible/python-memsource",
       },
     ],
   },
@@ -219,12 +207,6 @@ export const caseStudies: CaseStudy[] = [
       "Replaced a manual metadata workflow with a productized interface.",
     ],
     stack: ["Python", "JavaScript", "REST APIs"],
-    links: [
-      {
-        label: "github.com/adityamulik/IPTC-Backend",
-        href: "https://github.com/adityamulik/IPTC-Backend",
-      },
-    ],
   },
 ];
 

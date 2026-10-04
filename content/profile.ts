@@ -7,15 +7,15 @@ export const profile = {
   phone: "+1-857-488-1743",
   website: "https://www.adityamulik.com",
   resumePath: "/Aditya_Mulik_Resume.pdf",
-  photo: "/images/profilepic.jpg",
+  photo: "/images/profile.jpg",
   linkedin: "https://www.linkedin.com/in/adityamulik",
   github: "https://github.com/adityamulik",
   tagline:
     "I design production AI systems—multi-agent orchestration, MCP tools, and federated platforms—that run at the scale of millions of users and billions of events.",
   summary:
-    "Senior software engineer focused on AI/ML platforms and distributed systems. I turn natural language into automated workflows, orchestrate multi-agent experiences across voice, vision, and text, and keep high-availability data planes in front of millions of people. The same work is documented here for hiring managers and as a public evidence record for independent professional contributions.",
+    "Senior software engineer focused on AI/ML platforms and distributed systems. I turn natural language into automated workflows, orchestrate multi-agent experiences across voice, vision, and text, and keep a tier-0, low-latency data plane in front of millions of people. The same work is documented here for hiring managers and as a public evidence record of independent professional contributions.",
   about:
-    "I am a Senior Software Engineer working on AI/ML and platform systems: agentic applications grounded in real operational data, multi-agent orchestration on Google ADK, and a federated GraphQL gateway spanning 70+ providers. Before that I shipped open-source localization automation at Red Hat, taught graduate software-design courses at Northeastern University, and spent several years automating infrastructure and analytics pipelines. I write, speak, judge, and contribute upstream so the patterns I use in production can be inspected independently.",
+    "I am a Senior Software Engineer working on AI/ML and platform systems: agentic applications grounded in real operational data, multi-agent orchestration on Google ADK, and a federated GraphQL gateway spanning 30+ providers with a read-through cache on the ingestion path. Before that I built localization automation at Red Hat, taught graduate software-design courses at Northeastern University, and spent several years automating infrastructure and analytics pipelines. I write, speak, and judge so the work can be inspected independently.",
 };
 
 export const nav = [
@@ -32,19 +32,19 @@ export const impactStats = [
     detail: "Agentic store workflows on live data via MCP tools and skills.",
   },
   {
-    value: "70+",
+    value: "30+",
     label: "Federated providers",
-    detail: "GraphQL gateway unifying fragmented access for millions of users.",
+    detail: "GraphQL gateway with a read-through cache for low-latency, tier-0 traffic.",
   },
   {
     value: "99.999%",
     label: "Availability",
-    detail: "Ingestion pipelines for billions of events on the critical path.",
+    detail: "Ingestion pipelines for billions of events on a business-critical path.",
   },
   {
     value: "2,000+",
     label: "Galaxy downloads",
-    detail: "Official Ansible–Memsource collection for enterprise localization.",
+    detail: "Ansible–Memsource collection for enterprise localization.",
   },
 ];
 

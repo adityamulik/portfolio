@@ -1,9 +1,4 @@
-export type EvidenceCategory =
-  | "publication"
-  | "speaking"
-  | "judging"
-  | "opensource"
-  | "award";
+export type EvidenceCategory = "publication" | "speaking" | "judging" | "award";
 
 export type EvidenceItem = {
   slug: string;
@@ -21,7 +16,6 @@ export const evidenceCategories: { id: EvidenceCategory; label: string }[] = [
   { id: "publication", label: "Publications" },
   { id: "speaking", label: "Speaking" },
   { id: "judging", label: "Judging" },
-  { id: "opensource", label: "Open source" },
   { id: "award", label: "Awards" },
 ];
 
@@ -74,42 +68,6 @@ export const evidence: EvidenceItem[] = [
     proofLabel: "Devpost judges list",
     proofUrl: "https://intellibus-hackathon-2025.devpost.com/",
     featured: true,
-  },
-  {
-    slug: "ansible-memsource-oss",
-    category: "opensource",
-    title: "ansible.memsource collection",
-    venue: "Ansible / Red Hat",
-    date: "2022",
-    summary:
-      "Co-author of the official Ansible collection for Memsource localization workflows. Listed as a contributor on the public GitHub repository.",
-    proofLabel: "GitHub repository",
-    proofUrl: "https://github.com/ansible/ansible-collection-memsource",
-    featured: true,
-  },
-  {
-    slug: "mcp-production-toolkit",
-    category: "opensource",
-    title: "MCP production toolkit & LLM platform primitives",
-    venue: "GitHub",
-    date: "2025 – Present",
-    summary:
-      "Open Python reference for turning one-off LLM apps into shared infrastructure, including MCP server integration and related platform primitives.",
-    proofLabel: "GitHub repository",
-    proofUrl: "https://github.com/adityamulik/mcp-production-toolkit",
-    featured: true,
-  },
-  {
-    slug: "adk-langchain-owasp",
-    category: "opensource",
-    title: "Community involvement: Google ADK, LangChain, OWASP GenAI",
-    venue: "Open source & standards community",
-    date: "Ongoing",
-    summary:
-      "Active participation in the AI orchestration and GenAI security communities, including Google ADK, LangChain, and OWASP GenAI.",
-    proofLabel: "OWASP GenAI project",
-    proofUrl: "https://genai.owasp.org/",
-    featured: false,
   },
   {
     slug: "techathon-2024",

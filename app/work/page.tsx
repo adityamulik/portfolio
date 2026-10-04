@@ -5,7 +5,7 @@ import { caseStudies, roles } from "@/content/work";
 
 export const metadata = createMetadata({
   title: "Work",
-  description: "Experience and case studies spanning production AI systems, distributed platforms, and open source.",
+  description: "Experience and case studies spanning production AI systems and distributed platforms.",
   path: "/work/",
 });
 

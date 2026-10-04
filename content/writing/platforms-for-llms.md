@@ -16,8 +16,8 @@ Production LLM systems fail in boring ways. A prompt change ships without a vers
 The public article is the primary citation for that argument.
 Use the [Evidence](/evidence/) page for the outbound proof link
 (replace the InfoQ URL in `content/evidence.ts` if it still points at the homepage).
-Related engineering notes live in the [LLM platform primitives](/work/llm-platform-primitives/)
-case study and the [MCP production toolkit](https://github.com/adityamulik/mcp-production-toolkit)
-repository.
+Related production notes live in the
+[federated GraphQL and data ingestion](/work/graphql-federation/)
+and [Store Agentic Platform](/work/store-agentic-platform/) case studies.
 
 This post is the in-repo companion so the writing section is not an empty shelf while longer pieces live on InfoQ and conference sites.

@@ -15,10 +15,10 @@ export default function AboutPage() {
       <div className="grid items-start gap-12 lg:grid-cols-[220px_1fr]">
         <Image
           src={profile.photo}
-          alt={profile.name}
-          width={208}
-          height={208}
-          className="h-52 w-52 rounded-2xl object-cover grayscale"
+          alt={`${profile.name} speaking at QCon AI`}
+          width={420}
+          height={560}
+          className="h-72 w-full max-w-xs rounded-2xl object-cover object-[center_18%] shadow-sm"
         />
         <div>
           <SectionHeading eyebrow="About" title={profile.name} description={profile.title} />
