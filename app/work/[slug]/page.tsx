@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui";
-import { profile } from "@/content/profile";
 import { createMetadata } from "@/lib/seo";
 import { caseStudies, getCaseStudy } from "@/content/work";
 
@@ -29,6 +28,8 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
   if (!item) {
     notFound();
   }
+
+  const hasCode = Boolean(item.codeNote || item.links?.length);
 
   return (
     <Container className="py-16">
@@ -61,25 +62,23 @@ export default async function CaseStudyPage({ params }: { params: Params }) {
               <li key={tech}>{tech}</li>
             ))}
           </ul>
-          <div className="mt-8">
-            <p className="eyebrow">Code</p>
-            <ul className="mt-4 space-y-3 text-sm">
-              {item.links?.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              {!item.links?.some((link) => link.href === profile.github) ? (
-                <li>
-                  <a href={profile.github} className="text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
-                    github.com/adityamulik
-                  </a>
-                </li>
+          {hasCode ? (
+            <div className="mt-8">
+              <p className="eyebrow">Code</p>
+              {item.codeNote ? <p className="mt-4 text-sm text-ink-muted">{item.codeNote}</p> : null}
+              {item.links?.length ? (
+                <ul className="mt-4 space-y-3 text-sm">
+                  {item.links.map((link) => (
+                    <li key={link.href}>
+                      <a href={link.href} className="text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               ) : null}
-            </ul>
-          </div>
+            </div>
+          ) : null}
         </aside>
       </div>
     </Container>
