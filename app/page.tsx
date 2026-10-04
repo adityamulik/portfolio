@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { EvidenceCard, PostCard, WorkCard } from "@/components/cards";
+import { RecognitionCard, PostCard, WorkCard } from "@/components/cards";
 import { ResumeButton } from "@/components/ResumeModal";
 import { Container, SectionHeading } from "@/components/ui";
-import { featuredEvidence } from "@/content/evidence";
+import { featuredRecognition } from "@/content/recognition";
 import { externalWriting } from "@/content/external-writing";
+import { formatWritingDate } from "@/lib/dates";
 import { impactStats, profile } from "@/content/profile";
 import { featuredCaseStudies } from "@/content/work";
 import { createMetadata } from "@/lib/seo";
@@ -99,17 +100,17 @@ export default function HomePage() {
         <Container className="py-20">
           <div className="flex items-end justify-between gap-6">
             <SectionHeading
-              eyebrow="Evidence"
+              eyebrow="Recognition"
               title="Talks, judging and writing you can verify"
               description="Outbound links a hiring manager or petition reviewer can open without this site."
             />
-            <Link href="/evidence/" className="hidden shrink-0 text-sm text-accent sm:block">
+            <Link href="/recognition/" className="hidden shrink-0 text-sm text-accent sm:block">
               Full record
             </Link>
           </div>
           <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2">
-            {featuredEvidence.slice(0, 4).map((item) => (
-              <EvidenceCard key={item.slug} item={item} />
+            {featuredRecognition.slice(0, 4).map((item) => (
+              <RecognitionCard key={item.slug} item={item} />
             ))}
           </div>
         </Container>
@@ -137,6 +138,7 @@ export default function HomePage() {
                 className="flex h-full min-h-[200px] flex-col rounded-lg border border-ink/10 bg-surface p-6 hover:border-accent/50"
               >
                 <p className="eyebrow">{piece.venue}</p>
+                <p className="mt-2 text-sm text-ink-muted">{formatWritingDate(piece.date)}</p>
                 <h3 className="mt-3 font-display text-2xl text-ink">{piece.title}</h3>
                 <p className="mt-3 flex-1 text-ink-muted">{piece.summary}</p>
                 <p className="mt-6 text-sm text-accent">Read on {piece.venue}</p>

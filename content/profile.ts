@@ -20,7 +20,7 @@ export const profile = {
 
 export const nav = [
   { href: "/work/", label: "Work" },
-  { href: "/evidence/", label: "Evidence" },
+  { href: "/recognition/", label: "Recognition" },
   { href: "/writing/", label: "Writing" },
   { href: "/about/", label: "About" },
 ];

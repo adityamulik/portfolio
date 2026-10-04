@@ -1,6 +1,6 @@
 # Aditya Mulik
 
-Personal site for hiring managers and a public evidence record of platform engineering work.
+Personal site for hiring managers and a public recognition record of platform engineering work.
 
 Production currently deploys from `main`. This rebuild lives on a feature branch until it is merged.
 
@@ -38,7 +38,7 @@ draft: false
 ---
 ```
 
-`draft: true` keeps a post off the production build. Experience, case studies and evidence live in `content/`.
+`draft: true` keeps a post off the production build. Experience, case studies and recognition live in `content/`.
 
 ## Deploy
 

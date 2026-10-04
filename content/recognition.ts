@@ -1,4 +1,4 @@
-export type EvidenceCategory =
+export type RecognitionCategory =
   | "publication"
   | "speaking"
   | "judging"
@@ -6,19 +6,19 @@ export type EvidenceCategory =
   | "contribution"
   | "award";
 
-export type EvidenceItem = {
+export type RecognitionItem = {
   slug: string;
-  category: EvidenceCategory;
+  category: RecognitionCategory;
   title: string;
   venue: string;
   date: string;
   summary: string;
-  proofLabel: string;
-  proofUrl: string;
+  proofLabel?: string;
+  proofUrl?: string;
   featured: boolean;
 };
 
-export const evidenceCategories: { id: EvidenceCategory; label: string }[] = [
+export const recognitionCategories: { id: RecognitionCategory; label: string }[] = [
   { id: "publication", label: "Publications" },
   { id: "speaking", label: "Speaking" },
   { id: "judging", label: "Judging" },
@@ -27,13 +27,13 @@ export const evidenceCategories: { id: EvidenceCategory; label: string }[] = [
   { id: "award", label: "Awards" },
 ];
 
-export const evidence: EvidenceItem[] = [
+export const recognition: RecognitionItem[] = [
   {
     slug: "infoq-platform-playbook",
     category: "publication",
     title: "A Platform Engineering Playbook for Production LLMs",
     venue: "InfoQ",
-    date: "2026",
+    date: "October 2026",
     summary:
       "Published article on InfoQ about the platform layer required to run LLM systems in production. Independent editorial venue.",
     proofLabel: "InfoQ article",
@@ -97,8 +97,8 @@ export const evidence: EvidenceItem[] = [
     date: "March 2025",
     summary:
       "Judged a 600+ participant in-person hackathon supporting Intellibus expansion in Jamaica. Listed on the event Devpost.",
-    proofLabel: "Devpost judges list",
-    proofUrl: "https://intellibus-hackathon-2025.devpost.com/",
+    proofLabel: "Invitation letter",
+    proofUrl: "/proofs/Intellibus_Hackathon_Invitation.pdf",
     featured: true,
   },
   {
@@ -106,11 +106,9 @@ export const evidence: EvidenceItem[] = [
     category: "judging",
     title: "Judge, George Mason University Tech Fair",
     venue: "George Mason University",
-    date: "Feb 2026",
+    date: "February 2026",
     summary:
       "Judged a university tech fair. Independent academic judging of student work.",
-    proofLabel: "Timeline record",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
     featured: false,
   },
   {
@@ -119,10 +117,9 @@ export const evidence: EvidenceItem[] = [
     title: "Judge, VTHacks",
     venue: "Virginia Tech",
     date: "2025",
-    summary:
-      "Invited to judge Virginia Tech's hackathon.",
-    proofLabel: "LinkedIn",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    summary: "Invited to judge Virginia Tech's hackathon.",
+    proofLabel: "Invitation letter",
+    proofUrl: "/proofs/VTHacks25_Judge.pdf",
     featured: false,
   },
   {
@@ -131,10 +128,9 @@ export const evidence: EvidenceItem[] = [
     title: "Judge, Northeastern hackathon",
     venue: "Northeastern University",
     date: "2024",
-    summary:
-      "Invited to judge a Northeastern University hackathon.",
-    proofLabel: "LinkedIn",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    summary: "Invited to judge a Northeastern University hackathon.",
+    proofLabel: "Invitation letter",
+    proofUrl: "/proofs/NEU_Judge_Invitation.pdf",
     featured: false,
   },
   {
@@ -143,10 +139,9 @@ export const evidence: EvidenceItem[] = [
     title: "Judge, academic poster presentations",
     venue: "Northeastern University",
     date: "December 2024",
-    summary:
-      "Invited to judge academic poster presentations.",
-    proofLabel: "LinkedIn",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    summary: "Invited to judge academic poster presentations.",
+    proofLabel: "Invitation letter",
+    proofUrl: "/proofs/NEU_Judge_Invitation.pdf",
     featured: false,
   },
   {
@@ -155,10 +150,9 @@ export const evidence: EvidenceItem[] = [
     title: "Mentor, HackNC",
     venue: "University of North Carolina",
     date: "2025",
-    summary:
-      "Mentored students at HackNC.",
-    proofLabel: "LinkedIn",
-    proofUrl: "https://www.linkedin.com/in/adityamulik",
+    summary: "Mentored students at HackNC.",
+    proofLabel: "Invitation letter",
+    proofUrl: "/proofs/HackNC_2025_Invite_Mentor.pdf",
     featured: false,
   },
   {
@@ -169,9 +163,8 @@ export const evidence: EvidenceItem[] = [
     date: "2026",
     summary:
       "Named in the TinyTorch ML systems lab release, the hands-on curriculum built alongside Harvard cs249r.",
-    proofLabel: "GitHub release (archived)",
-    proofUrl:
-      "https://web.archive.org/web/20260424182327/https://github.com/harvard-edge/cs249r_book/releases/tag/tinytorch-v0.1.10",
+    proofLabel: "GitHub release",
+    proofUrl: "https://github.com/harvard-edge/cs249r_book/releases/tag/tinytorch-v0.1.10",
     featured: false,
   },
   {
@@ -214,4 +207,4 @@ export const evidence: EvidenceItem[] = [
   },
 ];
 
-export const featuredEvidence = evidence.filter((item) => item.featured);
+export const featuredRecognition = recognition.filter((item) => item.featured);
