@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   trailingSlash: true,
   devIndicators: false,
+  poweredByHeader: false,
 };
 
 export default nextConfig;
