@@ -138,10 +138,25 @@ function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
         aria-label={doc.title}
         className="relative flex h-[min(90vh,920px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-surface shadow-2xl"
       >
-        <div className="flex items-center justify-between border-b border-ink/10 px-5 py-3">
+        <div className="flex items-center justify-between gap-4 border-b border-ink/10 px-5 py-3">
           <div>
             <p className="font-display text-lg text-ink">{doc.title}</p>
-            <p className="text-sm text-ink-muted">{profile.name}</p>
+            {doc.src === profile.resumePath ? (
+              <p className="mt-0.5 max-w-xl text-sm text-ink-muted">
+                Email and mobile number are omitted for security. Please{" "}
+                <a
+                  href={profile.linkedin}
+                  className="text-accent underline decoration-accent/30 underline-offset-4"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  contact me on LinkedIn
+                </a>
+                .
+              </p>
+            ) : (
+              <p className="text-sm text-ink-muted">{profile.name}</p>
+            )}
           </div>
           <button
             type="button"
