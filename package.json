@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "node -e \"require('fs').copyFileSync('node_modules/pdfjs-dist/build/pdf.worker.min.mjs','public/pdf.worker.min.mjs')\""
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "next": "^15.5.4",
+    "pdfjs-dist": "^5.7.284",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",

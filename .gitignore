@@ -10,6 +10,9 @@
 /.next/
 /out/
 
+# copied from pdfjs-dist on npm install
+/public/pdf.worker.min.mjs
+
 # misc
 .DS_Store
 .env*
