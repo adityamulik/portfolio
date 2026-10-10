@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { PdfViewer } from "@/components/PdfViewer";
 import { profile } from "@/content/profile";
 
 type PdfDoc = {
@@ -112,9 +113,11 @@ function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
         close();
       }
     };
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "clip";
+    document.body.style.overflow = "clip";
     window.addEventListener("keydown", onKey);
     return () => {
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
@@ -125,7 +128,7 @@ function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-8">
+    <div className="fixed inset-0 z-[80] flex items-stretch justify-center p-2 sm:items-center sm:p-8">
       <button
         type="button"
         aria-label="Close document"
@@ -136,9 +139,9 @@ function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-label={doc.title}
-        className="relative flex h-[min(90vh,920px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-surface shadow-2xl"
+        className="relative flex h-[min(92dvh,920px)] max-h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-surface shadow-2xl"
       >
-        <div className="flex items-center justify-between gap-4 border-b border-ink/10 px-5 py-3">
+        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-ink/10 px-5 py-3">
           <div>
             <p className="font-display text-lg text-ink">{doc.title}</p>
             {doc.src === profile.resumePath ? (
@@ -166,7 +169,7 @@ function PdfDialog({ doc, close }: { doc: PdfDoc | null; close: () => void }) {
             Close
           </button>
         </div>
-        <iframe title={doc.title} src={`${doc.src}#view=FitH`} className="h-full w-full bg-white" />
+        <PdfViewer src={doc.src} title={doc.title} />
       </div>
     </div>
   );

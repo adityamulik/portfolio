@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   devIndicators: false,
   poweredByHeader: false,
+  transpilePackages: ["pdfjs-dist"],
 };
 
 export default nextConfig;
