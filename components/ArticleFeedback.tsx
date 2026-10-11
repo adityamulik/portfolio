@@ -176,7 +176,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         );
       }
       setBody("");
-      setStatus("Posted.");
+      setStatus("Thanks.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post that comment.");
     } finally {
@@ -191,7 +191,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
     <section className="mt-14 max-w-3xl border-t border-ink/10 pt-8" aria-labelledby="article-feedback-title">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 id="article-feedback-title" className="font-display text-2xl text-ink">
-          Comments
+          Feedback
         </h2>
         <div className="flex items-center gap-2 text-sm">
           <button
@@ -215,10 +215,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
           </button>
         </div>
       </div>
-
-      {usingLocal ? (
-        <p className="mt-3 text-sm text-ink-muted">Local preview. Saved in this browser only.</p>
-      ) : null}
+      <p className="mt-2 text-sm text-ink-muted">Like the article or leave a comment. Name is optional.</p>
 
       <form className="relative mt-5" onSubmit={onSubmit}>
         <label className="sr-only" aria-hidden="true">
@@ -237,7 +234,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
             minLength={2}
             maxLength={1200}
             rows={3}
-            placeholder="Add a comment"
+            placeholder="What did you think?"
             className="w-full resize-y rounded-t-lg bg-transparent px-3 py-2.5 text-base text-ink outline-none"
           />
           <div className="flex flex-wrap items-center gap-2 border-t border-ink/10 px-2 py-2">
@@ -275,7 +272,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
       </form>
 
       {visibleComments.length === 0 ? (
-        <p className="mt-6 text-sm text-ink-muted">No comments yet.</p>
+        <p className="mt-6 text-sm text-ink-muted">No comments yet. Be the first.</p>
       ) : (
         <ul className="mt-6 divide-y divide-ink/10 border-t border-ink/10">
           {visibleComments.map((comment) => (
