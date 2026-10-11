@@ -8,8 +8,6 @@ tags:
   - platform
 ---
 
-Organizations can no longer say what their AI spending buys. Here is how to find out.
-
 Written for CACM Practice. All figures come from published sources listed in the
 references or from the author's own experience. No employer data is used.
 
