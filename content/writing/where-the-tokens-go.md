@@ -14,7 +14,7 @@ references or from the author's own experience. No employer data is used.
 > "All motion is not progress and token usage alone is not a measure of impact of
 > any kind."
 >
-> Andrew Bosworth, CTO of Meta, in an internal memo [1]
+> Andrew Bosworth, CTO of Meta, in an internal memo [1](#ref-1)
 
 ## Introduction
 
@@ -33,19 +33,19 @@ usage means more productivity. Like lines of code, the measure was easy to
 collect, easy to game and silent about whether anything of value was produced.
 
 The bills arrived quickly. Uber reportedly exhausted its entire 2026 budget for
-AI coding tools in the first four months of the year [2]. Meta warned
+AI coding tools in the first four months of the year [2](#ref-2). Meta warned
 roughly 6,000 employees that internal AI costs were approaching billions of
 dollars, and noted that teams had little visibility into their own consumption
-[1]. Amazon dismantled a usage leaderboard after employees set up
+[1](#ref-1). Amazon dismantled a usage leaderboard after employees set up
 automated agents to perform meaningless tasks simply to keep their numbers high
-[3]. By summer the industry's vocabulary had shifted from
-"tokenmaxxing" to "tokenminimizing" [4].
+[3](#ref-3). By summer the industry's vocabulary had shifted from
+"tokenmaxxing" to "tokenminimizing" [4](#ref-4).
 
 These are not isolated cases. In a July 2026 survey of 700 engineering leaders,
 72% reported an unexpected AI cost spike in the past year, and organizations
 estimated that 26% of their AI spending is wasted. Yet 52% said no one clearly
 owns AI costs, and only 20% could find the cause within hours if their spending
-doubled overnight [5].
+doubled overnight [5](#ref-5).
 
 The common response has been to cap spending. Caps stop the bleeding, but they
 don't answer the question that matters: which of this spending was worth it? An
@@ -101,11 +101,11 @@ Recent measurements confirm how extreme this becomes. A 2026 study of AI agents
 performing programming tasks found that they consumed roughly 1,000 times more
 tokens than simpler uses of the same models, such as answering a coding
 question, and that input tokens, the resent history, drove most of the cost
-[6]. Two runs of the same agent on the same task differed by up to 30
+[6](#ref-6). Two runs of the same agent on the same task differed by up to 30
 times in total tokens. More spending did not reliably buy better results:
 accuracy often peaked at intermediate cost. And when the models were asked to
 predict their own consumption, they systematically underestimated it
-[6].
+[6](#ref-6).
 
 The practical consequence is that a single click in an application can turn
 into dozens of billed requests and hundreds of thousands of tokens, with an
@@ -127,7 +127,7 @@ many people. Provider invoices typically report totals by account or access
 key, not by purpose, so they answer "how much?" but not "for what?" It is no
 surprise that 56% of engineering leaders describe forecasting their AI spend as
 guesswork, or that only 45% say they understand what the AI features they build
-actually cost [5].
+actually cost [5](#ref-5).
 
 ### Three kinds of spending
 
@@ -150,9 +150,9 @@ At the **organizational** level, waste comes from systems no one is watching:
 retry loops, agents with no stopping condition, experiments left running over a
 weekend. Incentives make it worse. When usage is celebrated or ranked,
 employees respond rationally by producing usage. Amazon's experience is the
-clearest example [3], and it is not unusual: 57% of engineering
+clearest example [3](#ref-3), and it is not unusual: 57% of engineering
 leaders in the 2026 survey said their organization actively encourages
-tokenmaxxing [5].
+tokenmaxxing [5](#ref-5).
 
 At the **individual** level, waste comes from unexamined use. Organizations are
 encouraging employees to use AI everywhere, and much of that use is a real
@@ -186,8 +186,8 @@ which spending happens. I use six:
 
 Most organizations cannot fill in the share of spending for each row, and that
 inability is the point. When engineering leaders estimate that a quarter of
-their AI spending is wasted [5], they are guessing, because only 13%
-have even basic visibility into where it goes [5]. The estimate is
+their AI spending is wasted [5](#ref-5), they are guessing, because only 13%
+have even basic visibility into where it goes [5](#ref-5). The estimate is
 probably directionally right, but nobody can say which quarter, and so nobody
 can cut it.
 
@@ -214,7 +214,7 @@ The rule is deliberately simple. It will not settle every case, but it moves
 the conversation from "how much are we spending?" to "what did we get?", which
 is the conversation most organizations are not yet having. Only 26% of the
 leaders surveyed have a robust method for measuring the business value of their
-AI spending [5].
+AI spending [5](#ref-5).
 
 ## 4. Why current controls fall short
 
@@ -225,26 +225,26 @@ Each answers part of the question and misses the rest.
   was spent, but not for what purpose or with what result.
 - **Monthly invoice review** arrives weeks after the money is gone, at too
   coarse a level to act on. Uber exhausted a year's budget in four months
-  [2]; a monthly review reports such a problem only after it has
+  [2](#ref-2); a monthly review reports such a problem only after it has
   happened.
 - **Hard spending caps,** such as Uber's reported limit of $1,500 per employee
-  per month per tool [4], stop spending but cannot tell valuable
+  per month per tool [4](#ref-4), stop spending but cannot tell valuable
   spending from waste. A cap can halt a production feature or a critical
   evaluation while a runaway experiment on another account keeps running.
 - **Usage leaderboards** measure activity, and therefore produce activity. Meta
-  and Amazon both abandoned theirs [1, 3, 7].
+  and Amazon both abandoned theirs [1](#ref-1), [3](#ref-3), [7](#ref-7).
 
 Most organizations already have policies; 73% of those surveyed have AI cost
-policies in place [5]. What they lack is the information to apply
+policies in place [5](#ref-5). What they lack is the information to apply
 them intelligently.
 
 The most promising recent development is the AI *gateway*: a single service
 through which every AI request passes on its way to the provider. Meta,
 Microsoft and Databricks have all reportedly adopted gateways to track and cap
-spending in real time [1, 4]. A gateway is the right place to enforce
+spending in real time [1](#ref-1), [4](#ref-4). A gateway is the right place to enforce
 controls, but on its own it still measures volume. Even with one in place, an
 engineering leader at Databricks observed that because engineers' AI budgets
-remained unlimited, "tokenmaxxing still exists" [4]. A gateway knows
+remained unlimited, "tokenmaxxing still exists" [4](#ref-4). A gateway knows
 how many tokens each team used. Unless it is told, it does not know what those
 tokens were for or whether anything came of them.
 
@@ -293,18 +293,18 @@ most of it.
 
 - **Per-run budgets.** Stop an agent after a set amount of spend or number of
   steps, and report the cutoff rather than silently retrying. Since models
-  underestimate their own consumption [6], the limit must be enforced
+  underestimate their own consumption [6](#ref-6), the limit must be enforced
   outside the model.
 - **Retry limits.** Cap automatic retries, and retry only errors that are
   actually transient.
 - **Caching.** Avoid paying again for context that is identical across
   requests, such as long instructions or reference documents. Providers discount
   repeated input heavily; Anthropic, for example, charges 5% of the normal
-  input price for cached input on its current flagship model [11].
+  input price for cached input on its current flagship model [11](#ref-11).
 - **Routing by difficulty.** Send simple requests to smaller, cheaper models
   and reserve the expensive ones for hard problems. Salesforce's CEO, facing a
   reported Anthropic bill of about $300 million for the year, publicly wished
-  for exactly this kind of "smart router" [2].
+  for exactly this kind of "smart router" [2](#ref-2).
 - **Fixing and trimming tools.** Tools often return far more data than the
   model needs, and sometimes return errors the model cannot recover from. Every
   byte and every failed call is paid for again on each later step of the run.
@@ -312,7 +312,7 @@ most of it.
 ## 6. The process in action
 
 A September 2026 account from Databricks shows all three parts working together
-[8].
+[8](#ref-8).
 
 **Attribute.** Databricks routes its internal agents' requests through a
 gateway that records every tool call: the tool's name, its arguments, any
@@ -368,7 +368,7 @@ resends the growing history. To make the cost concrete, take exactly 1 million
 tokens. Because the agent mostly rereads context, assume 90% of them are input
 and 10% are output, and price them at the published rates for Anthropic's
 flagship model, Claude Opus 5.5: $4 per million input tokens and $20 per
-million output tokens [11].
+million output tokens [11](#ref-11).
 
 | Tokens | Count | Rate | Cost |
 | --- | --- | --- | --- |
@@ -382,7 +382,7 @@ bill, and that is exactly the problem.
 The price also depends heavily on the model. The same build at the rates of the
 previous Opus generations ($5 and $25 per million) costs $7.00, and at the
 rates of the earlier Opus 4 and 4.1 models ($15 and $75 per million) it costs
-$21.00 [11]. Caching can lower the cost when much of the input
+$21.00 [11](#ref-11). Caching can lower the cost when much of the input
 repeats exactly, but an agent rewriting its own code changes its context
 constantly, so caching does not remove the waste. It only makes each wasted
 token cheaper.
@@ -400,9 +400,9 @@ a year and the $5.60 cost per discarded one-pass build calculated above.
 
 The same arithmetic can be checked from the top down. Microsoft reportedly
 found some employees spending $500 to $2,000 a month on a single AI coding
-tool [4]. An organization of 1,000 engineers spending the midpoint of
+tool [4](#ref-4). An organization of 1,000 engineers spending the midpoint of
 that range, $1,250 a month each, spends $15 million a year. If the industry's
-own estimate holds and about a quarter of AI spending is wasted [5],
+own estimate holds and about a quarter of AI spending is wasted [5](#ref-5),
 roughly $4 million of that buys nothing. The bottom-up and top-down estimates
 land in the same range: millions of dollars a year for a large engineering
 organization, accumulated from small decisions that each cost about as much as
@@ -449,7 +449,7 @@ This is not only a personal impression. In a 2025 randomized controlled trial,
 16 experienced open-source developers worked on real tasks in codebases they
 knew well, with and without AI tools. With AI, they took 19% longer to finish,
 even though they believed afterwards that AI had made them about 20% faster
-[9]. The study does not show that AI tools are unhelpful in general,
+[9](#ref-9). The study does not show that AI tools are unhelpful in general,
 and the tools have improved since. It does show that developers' own sense of
 their productivity is an unreliable guide to whether AI is helping, which is
 exactly why unexamined use goes unnoticed.
@@ -510,7 +510,7 @@ to the cloud a decade ago hit the same wall and responded by developing a
 discipline, now called FinOps, for attributing cloud costs to the teams and
 purposes that incurred them. That discipline is now absorbing AI: 98% of FinOps
 practitioners report managing AI spending in 2026, up from 31% two years
-earlier [10]. LLMs are forcing the cloud lesson again, faster and
+earlier [10](#ref-10). LLMs are forcing the cloud lesson again, faster and
 across far more people, because nearly every employee can now make a metered
 request.
 
@@ -565,35 +565,35 @@ the money is gone.
    Employee AI Usage," *The Information*, June 2026. Summarized in "Meta Caps
    Internal AI Token Spending After Costs Approach Billions in 2026," MLQ, June
    13, 2026.
-   <https://mlq.ai/news/meta-caps-internal-ai-token-spending-after-costs-approach-billions-in-2026/>
+   [https://mlq.ai/news/meta-caps-internal-ai-token-spending-after-costs-approach-billions-in-2026/](https://mlq.ai/news/meta-caps-internal-ai-token-spending-after-costs-approach-billions-in-2026/)
 2. J. Kahn, "Tokenmaxxing is over. It was a flawed way
    to measure a company's ROI from AI," *Fortune*, May 28, 2026.
-   <https://fortune.com/2026/05/28/tokenmaxxing-is-dead-companies-didnt-get-the-roi-from-ai-they-wanted-to-see/>
+   [https://fortune.com/2026/05/28/tokenmaxxing-is-dead-companies-didnt-get-the-roi-from-ai-they-wanted-to-see/](https://fortune.com/2026/05/28/tokenmaxxing-is-dead-companies-didnt-get-the-roi-from-ai-they-wanted-to-see/)
 3. *Financial Times*, reporting on Amazon's
-   token-usage leaderboards, 2026; as cited in [2].
+   token-usage leaderboards, 2026; as cited in [2](#ref-2).
 4. "The tokenmaxxing era is over. Now companies are
    'tokenminimizing'," *The Next Web*, June 17, 2026.
-   <https://thenextweb.com/news/tokenminimizing-companies-cap-employee-ai-spending>
+   [https://thenextweb.com/news/tokenminimizing-companies-cap-employee-ai-spending](https://thenextweb.com/news/tokenminimizing-companies-cap-employee-ai-spending)
 5. Harness, *2026 State of AI in FinOps*, July 29,
    2026. Online survey of 700 engineering leaders and practitioners in the US,
    UK, France, Germany and India, conducted by Sapio Research, May-June 2026.
-   <https://www.harness.io/resources/state-of-ai-in-finops-2026>
+   [https://www.harness.io/resources/state-of-ai-in-finops-2026](https://www.harness.io/resources/state-of-ai-in-finops-2026)
 6. L. Bai, Z. Huang, X. Wang, J. Sun, R. Mihalcea, E.
    Brynjolfsson, A. Pentland and J. Pei, "How Do AI Agents Spend Your Money?
    Analyzing and Predicting Token Consumption in Agentic Coding Tasks,"
-   arXiv:2604.22750, April 2026. <https://arxiv.org/abs/2604.22750>
+   arXiv:2604.22750, April 2026. [https://arxiv.org/abs/2604.22750](https://arxiv.org/abs/2604.22750)
 7. "Meta killed employee AI token dashboard,"
    *Fortune*, April 9, 2026.
-   <https://fortune.com/2026/04/09/meta-killed-employee-ai-token-dashboard/>
+   [https://fortune.com/2026/04/09/meta-killed-employee-ai-token-dashboard/](https://fortune.com/2026/04/09/meta-killed-employee-ai-token-dashboard/)
 8. A. Polyzotis, "How we eliminated $1 million a year
    of wasted AI agent spend in one hour," Databricks Blog, September 1, 2026.
-   <https://www.databricks.com/blog/how-we-eliminated-1-million-year-wasted-ai-agent-spend-one-hour>
+   [https://www.databricks.com/blog/how-we-eliminated-1-million-year-wasted-ai-agent-spend-one-hour](https://www.databricks.com/blog/how-we-eliminated-1-million-year-wasted-ai-agent-spend-one-hour)
 9. METR, "Measuring the Impact of Early-2025 AI on
    Experienced Open-Source Developer Productivity," arXiv:2507.09089, July
-   2025. <https://arxiv.org/abs/2507.09089>
+   2025. [https://arxiv.org/abs/2507.09089](https://arxiv.org/abs/2507.09089)
 10. FinOps Foundation, *State of FinOps 2026*, survey
-    of 1,192 practitioners. <https://data.finops.org>
+    of 1,192 practitioners. [https://data.finops.org](https://data.finops.org)
 11. Anthropic, "Pricing," Claude Platform
     documentation, accessed October 11, 2026. Claude Opus 5.5: $4 per million
     input tokens, $20 per million output tokens, $0.20 per million cached input
-    tokens. <https://platform.claude.com/docs/en/about-claude/pricing>
+    tokens. [https://platform.claude.com/docs/en/about-claude/pricing](https://platform.claude.com/docs/en/about-claude/pricing)
