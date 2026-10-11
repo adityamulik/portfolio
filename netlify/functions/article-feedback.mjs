@@ -1,0 +1,186 @@
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+
+const SLUG = /^[a-z0-9-]{1,80}$/;
+const MAX_COMMENTS = 200;
+const MAX_BODY = 1200;
+const MAX_NAME = 80;
+const STORE_NAME = "article-feedback";
+const DEV_FILE = path.join(process.cwd(), ".netlify", "article-feedback.json");
+
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
+function cleanText(value, max) {
+  return String(value ?? "")
+    .replaceAll("\u0000", "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, max);
+}
+
+function emptyState() {
+  return { likes: 0, comments: [] };
+}
+
+function publicState(state, persistent) {
+  const comments = Array.isArray(state.comments) ? state.comments : [];
+  return {
+    likes: Number(state.likes) || 0,
+    comments: comments.map((comment) => ({
+      id: comment.id,
+      name: comment.name,
+      body: comment.body,
+      at: comment.at,
+    })),
+    persistent,
+  };
+}
+
+function hosted() {
+  return Boolean(process.env.NETLIFY || process.env.NETLIFY_BLOBS_CONTEXT);
+}
+
+async function blobStore() {
+  const { getStore } = await import("@netlify/blobs");
+  return getStore({ name: STORE_NAME, consistency: "strong" });
+}
+
+async function loadDevFile() {
+  try {
+    return JSON.parse(await readFile(DEV_FILE, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
+async function saveDevFile(data) {
+  await mkdir(path.dirname(DEV_FILE), { recursive: true });
+  await writeFile(DEV_FILE, JSON.stringify(data, null, 2), "utf8");
+}
+
+async function loadState(slug) {
+  if (hosted()) {
+    const store = await blobStore();
+    const data = await store.get(slug, { type: "json", consistency: "strong" });
+    return data && typeof data === "object" ? data : emptyState();
+  }
+  const all = await loadDevFile();
+  return all[slug] || emptyState();
+}
+
+async function saveState(slug, state) {
+  if (hosted()) {
+    const store = await blobStore();
+    await store.setJSON(slug, state);
+    return;
+  }
+  const all = await loadDevFile();
+  all[slug] = state;
+  await saveDevFile(all);
+}
+
+function rateKey(req, slug) {
+  const ip = req.headers.get("x-nf-client-connection-ip") || req.headers.get("x-forwarded-for") || "local";
+  return createHash("sha256").update(`${ip}:${slug}`).digest("hex").slice(0, 16);
+}
+
+export default async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204 });
+  }
+
+  const persistent = hosted();
+  const url = new URL(req.url);
+  const slug = cleanText(url.searchParams.get("slug") || "", 80);
+
+  try {
+    if (req.method === "GET") {
+      if (!SLUG.test(slug)) {
+        return json(400, { error: "Unknown article." });
+      }
+      return json(200, publicState(await loadState(slug), persistent));
+    }
+
+    if (req.method !== "POST") {
+      return json(405, { error: "Method not allowed." });
+    }
+
+    let payload;
+    try {
+      payload = await req.json();
+    } catch {
+      return json(400, { error: "Invalid request." });
+    }
+
+    const postSlug = cleanText(payload.slug, 80);
+    if (!SLUG.test(postSlug)) {
+      return json(400, { error: "Unknown article." });
+    }
+
+    if (cleanText(payload.website, 80)) {
+      return json(200, publicState(await loadState(postSlug), persistent));
+    }
+
+    const state = await loadState(postSlug);
+    const action = String(payload.action || "");
+
+    if (action === "like" || action === "unlike") {
+      const nextLikes =
+        action === "like" ? Number(state.likes || 0) + 1 : Math.max(0, Number(state.likes || 0) - 1);
+      const next = { ...state, likes: nextLikes };
+      await saveState(postSlug, next);
+      return json(200, publicState(next, persistent));
+    }
+
+    if (action !== "comment") {
+      return json(400, { error: "Unknown action." });
+    }
+
+    const body = cleanText(payload.body, MAX_BODY);
+    const name = cleanText(payload.name, MAX_NAME);
+    if (body.length < 2) {
+      return json(400, { error: "Write a short comment first." });
+    }
+
+    const comments = Array.isArray(state.comments) ? state.comments : [];
+    if (comments.length >= MAX_COMMENTS) {
+      return json(429, { error: "This article is not taking more comments right now." });
+    }
+
+    const stamp = comments[comments.length - 1]?.at;
+    const key = rateKey(req, postSlug);
+    if (stamp && Date.now() - Date.parse(stamp) < 8000 && comments[comments.length - 1]?.key === key) {
+      return json(429, { error: "Please wait a moment before commenting again." });
+    }
+
+    const comment = {
+      id: crypto.randomUUID(),
+      name: name || "Anonymous",
+      body,
+      at: new Date().toISOString(),
+      key,
+    };
+    const next = {
+      likes: Number(state.likes) || 0,
+      comments: [...comments, comment],
+    };
+    await saveState(postSlug, next);
+    return json(200, publicState(next, persistent));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Storage unavailable.";
+    return json(503, { error: "Could not reach persistent storage.", detail: message });
+  }
+};
+
+export const config = {
+  path: "/api/feedback",
+};
