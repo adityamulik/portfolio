@@ -47,12 +47,24 @@ function publicState(state, persistent) {
   };
 }
 
-function hosted() {
-  return Boolean(process.env.NETLIFY || process.env.NETLIFY_BLOBS_CONTEXT);
+function onLambda() {
+  try {
+    return process.cwd().startsWith("/var/task");
+  } catch {
+    return false;
+  }
 }
 
 function blobStore() {
   return getStore({ name: STORE_NAME, consistency: "strong" });
+}
+
+function openBlobs() {
+  try {
+    return blobStore();
+  } catch {
+    return null;
+  }
 }
 
 async function loadDevFile() {
@@ -69,22 +81,31 @@ async function saveDevFile(data) {
 }
 
 async function loadState(slug) {
-  if (hosted()) {
-    const data = await blobStore().get(slug, { type: "json", consistency: "strong" });
-    return data && typeof data === "object" ? data : emptyState();
+  const store = openBlobs();
+  if (store) {
+    const data = await store.get(slug, { type: "json", consistency: "strong" });
+    return { state: data && typeof data === "object" ? data : emptyState(), persistent: true };
+  }
+  if (onLambda()) {
+    throw new Error("Netlify Blobs is not available in this function.");
   }
   const all = await loadDevFile();
-  return all[slug] || emptyState();
+  return { state: all[slug] || emptyState(), persistent: false };
 }
 
 async function saveState(slug, state) {
-  if (hosted()) {
-    await blobStore().setJSON(slug, state);
-    return;
+  const store = openBlobs();
+  if (store) {
+    await store.setJSON(slug, state);
+    return true;
+  }
+  if (onLambda()) {
+    throw new Error("Netlify Blobs is not available in this function.");
   }
   const all = await loadDevFile();
   all[slug] = state;
   await saveDevFile(all);
+  return false;
 }
 
 function rateKey(event, slug) {
@@ -109,7 +130,6 @@ export async function handler(event) {
     return { statusCode: 204, body: "" };
   }
 
-  const persistent = hosted();
   const slug = cleanText(event.queryStringParameters?.slug || "", 80);
 
   try {
@@ -117,7 +137,8 @@ export async function handler(event) {
       if (!SLUG.test(slug)) {
         return json(400, { error: "Unknown article." });
       }
-      return json(200, publicState(await loadState(slug), persistent));
+      const loaded = await loadState(slug);
+      return json(200, publicState(loaded.state, loaded.persistent));
     }
 
     if (method !== "POST") {
@@ -137,17 +158,19 @@ export async function handler(event) {
     }
 
     if (cleanText(payload.website, 80)) {
-      return json(200, publicState(await loadState(postSlug), persistent));
+      const loaded = await loadState(postSlug);
+      return json(200, publicState(loaded.state, loaded.persistent));
     }
 
-    const state = await loadState(postSlug);
+    const loaded = await loadState(postSlug);
+    const state = loaded.state;
     const action = String(payload.action || "");
 
     if (action === "like" || action === "unlike") {
       const nextLikes =
         action === "like" ? Number(state.likes || 0) + 1 : Math.max(0, Number(state.likes || 0) - 1);
       const next = { ...state, likes: nextLikes };
-      await saveState(postSlug, next);
+      const persistent = await saveState(postSlug, next);
       return json(200, publicState(next, persistent));
     }
 
@@ -183,10 +206,10 @@ export async function handler(event) {
       likes: Number(state.likes) || 0,
       comments: [...comments, comment],
     };
-    await saveState(postSlug, next);
+    const persistent = await saveState(postSlug, next);
     return json(200, publicState(next, persistent));
   } catch (error) {
     const message = error instanceof Error ? error.message : "Storage unavailable.";
-    return json(503, { error: "Could not reach persistent storage.", detail: message });
+    return json(503, { error: "Could not save that just now.", detail: message });
   }
 }
