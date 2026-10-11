@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ArticleFeedback } from "@/components/ArticleFeedback";
 import { Markdown } from "@/components/Markdown";
 import { Container } from "@/components/ui";
 import { formatWritingDate } from "@/lib/dates";
@@ -50,6 +51,7 @@ export default async function WritingPostPage({ params }: { params: Params }) {
       <article className="mt-10 max-w-3xl">
         <Markdown content={post.content} />
       </article>
+      <ArticleFeedback slug={post.slug} />
     </Container>
   );
 }

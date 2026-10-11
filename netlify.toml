@@ -31,6 +31,11 @@
     Content-Disposition = "inline"
 
 [[redirects]]
+  from = "/api/feedback"
+  to = "/.netlify/functions/article-feedback"
+  status = 200
+
+[[redirects]]
   from = "/evidence"
   to = "/recognition/"
   status = 301

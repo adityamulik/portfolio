@@ -10,6 +10,7 @@
     "postinstall": "node -e \"require('fs').copyFileSync('node_modules/pdfjs-dist/build/pdf.worker.min.mjs','public/pdf.worker.min.mjs')\""
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.4",
     "gray-matter": "^4.0.3",
     "next": "^15.5.4",
     "pdfjs-dist": "^5.7.284",
