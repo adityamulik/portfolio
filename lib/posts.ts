@@ -25,7 +25,10 @@ function readPostFile(filename: string): Post {
   return {
     slug,
     title: String(data.title ?? slug),
-    date: String(data.date ?? ""),
+    date:
+      data.date instanceof Date
+        ? data.date.toISOString().slice(0, 10)
+        : String(data.date ?? ""),
     summary: String(data.summary ?? ""),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: Boolean(data.draft),

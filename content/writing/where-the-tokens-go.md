@@ -1,6 +1,6 @@
 ---
 title: Where the Tokens Go
-date: 2026-10-11
+date: "2026-10-11"
 summary: Organizations can no longer say what their AI spending buys. Here is how to find out.
 tags:
   - AI
