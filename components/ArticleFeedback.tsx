@@ -199,19 +199,20 @@ export function ArticleFeedback({ slug }: { slug: string }) {
             onClick={toggleLike}
             disabled={disabled}
             aria-pressed={liked}
-            aria-label={liked ? `Unlike. ${likes} likes` : `Like. ${likes} likes`}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 transition ${
+            aria-label={
+              liked
+                ? `Unlike. ${likes} ${likes === 1 ? "like" : "likes"}`
+                : `Like. ${likes} ${likes === 1 ? "like" : "likes"}`
+            }
+            className={`inline-flex min-w-[3.25rem] items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 transition ${
               liked
                 ? "border-accent bg-accent text-white"
                 : "border-ink/15 bg-surface text-ink hover:border-accent hover:text-accent"
             } disabled:opacity-60`}
           >
             <Heart filled={liked} />
-            <span aria-live="polite">{ready ? likes : "…"}</span>
+            <span aria-live="polite">{likes}</span>
           </button>
-          <p className="text-ink-muted" aria-live="polite">
-            {comments.length} {comments.length === 1 ? "comment" : "comments"}
-          </p>
         </div>
       </div>
 
@@ -220,7 +221,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
       ) : null}
 
       <form className="relative mt-5" onSubmit={onSubmit}>
-        <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
+        <label className="sr-only" aria-hidden="true">
           Company
           <input value={website} onChange={(event) => setWebsite(event.target.value)} tabIndex={-1} autoComplete="off" />
         </label>
