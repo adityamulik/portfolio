@@ -1,7 +1,7 @@
 const { createHash } = require("node:crypto");
 const { mkdir, readFile, writeFile } = require("node:fs/promises");
 const path = require("node:path");
-const { getStore } = require("@netlify/blobs");
+const { connectLambda, getStore } = require("@netlify/blobs");
 
 const SLUG = /^[a-z0-9-]{1,80}$/;
 const MAX_COMMENTS = 200;
@@ -55,22 +55,16 @@ function onLambda() {
   }
 }
 
-function env(name) {
-  return process.env[name] || "";
+function attachBlobs(event) {
+  if (!event || !event.blobs) {
+    return;
+  }
+  connectLambda(event);
 }
 
 function openBlobs() {
-  const options = { name: STORE_NAME, consistency: "strong" };
-  const siteID = env("SITE_ID") || env("NETLIFY_SITE_ID");
-  const token = env("NETLIFY_AUTH_TOKEN") || env("BLOBS_TOKEN");
-  if (siteID) {
-    options.siteID = siteID;
-  }
-  if (token) {
-    options.token = token;
-  }
   try {
-    return getStore(options);
+    return getStore(STORE_NAME);
   } catch {
     return null;
   }
@@ -92,7 +86,7 @@ async function saveDevFile(data) {
 async function loadState(slug) {
   const store = openBlobs();
   if (store) {
-    const data = await store.get(slug, { type: "json", consistency: "strong" });
+    const data = await store.get(slug, { type: "json" });
     return { state: data && typeof data === "object" ? data : emptyState(), persistent: true };
   }
   if (onLambda()) {
@@ -137,6 +131,12 @@ exports.handler = async function handler(event) {
   const method = event.httpMethod || "GET";
   if (method === "OPTIONS") {
     return { statusCode: 204, body: "" };
+  }
+
+  try {
+    attachBlobs(event);
+  } catch {
+    // Local runs do not include the Lambda Blobs payload.
   }
 
   const slug = cleanText(event.queryStringParameters?.slug || "", 80);
