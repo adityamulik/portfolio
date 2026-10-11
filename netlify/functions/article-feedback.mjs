@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { getStore } from "@netlify/blobs";
 
 const SLUG = /^[a-z0-9-]{1,80}$/;
 const MAX_COMMENTS = 200;
@@ -10,13 +11,14 @@ const STORE_NAME = "article-feedback";
 const DEV_FILE = path.join(process.cwd(), ".netlify", "article-feedback.json");
 
 function json(status, body) {
-  return new Response(JSON.stringify(body), {
-    status,
+  return {
+    statusCode: status,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
     },
-  });
+    body: JSON.stringify(body),
+  };
 }
 
 function cleanText(value, max) {
@@ -49,8 +51,7 @@ function hosted() {
   return Boolean(process.env.NETLIFY || process.env.NETLIFY_BLOBS_CONTEXT);
 }
 
-async function blobStore() {
-  const { getStore } = await import("@netlify/blobs");
+function blobStore() {
   return getStore({ name: STORE_NAME, consistency: "strong" });
 }
 
@@ -69,8 +70,7 @@ async function saveDevFile(data) {
 
 async function loadState(slug) {
   if (hosted()) {
-    const store = await blobStore();
-    const data = await store.get(slug, { type: "json", consistency: "strong" });
+    const data = await blobStore().get(slug, { type: "json", consistency: "strong" });
     return data && typeof data === "object" ? data : emptyState();
   }
   const all = await loadDevFile();
@@ -79,8 +79,7 @@ async function loadState(slug) {
 
 async function saveState(slug, state) {
   if (hosted()) {
-    const store = await blobStore();
-    await store.setJSON(slug, state);
+    await blobStore().setJSON(slug, state);
     return;
   }
   const all = await loadDevFile();
@@ -88,35 +87,46 @@ async function saveState(slug, state) {
   await saveDevFile(all);
 }
 
-function rateKey(req, slug) {
-  const ip = req.headers.get("x-nf-client-connection-ip") || req.headers.get("x-forwarded-for") || "local";
+function rateKey(event, slug) {
+  const headers = event.headers || {};
+  const ip = headers["x-nf-client-connection-ip"] || headers["x-forwarded-for"] || "local";
   return createHash("sha256").update(`${ip}:${slug}`).digest("hex").slice(0, 16);
 }
 
-export default async (req) => {
-  if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204 });
+function parseBody(event) {
+  const raw = event.isBase64Encoded
+    ? Buffer.from(event.body || "", "base64").toString("utf8")
+    : event.body || "";
+  if (!raw) {
+    return {};
+  }
+  return JSON.parse(raw);
+}
+
+export async function handler(event) {
+  const method = event.httpMethod || "GET";
+  if (method === "OPTIONS") {
+    return { statusCode: 204, body: "" };
   }
 
   const persistent = hosted();
-  const url = new URL(req.url);
-  const slug = cleanText(url.searchParams.get("slug") || "", 80);
+  const slug = cleanText(event.queryStringParameters?.slug || "", 80);
 
   try {
-    if (req.method === "GET") {
+    if (method === "GET") {
       if (!SLUG.test(slug)) {
         return json(400, { error: "Unknown article." });
       }
       return json(200, publicState(await loadState(slug), persistent));
     }
 
-    if (req.method !== "POST") {
+    if (method !== "POST") {
       return json(405, { error: "Method not allowed." });
     }
 
     let payload;
     try {
-      payload = await req.json();
+      payload = parseBody(event);
     } catch {
       return json(400, { error: "Invalid request." });
     }
@@ -157,7 +167,7 @@ export default async (req) => {
     }
 
     const stamp = comments[comments.length - 1]?.at;
-    const key = rateKey(req, postSlug);
+    const key = rateKey(event, postSlug);
     if (stamp && Date.now() - Date.parse(stamp) < 8000 && comments[comments.length - 1]?.key === key) {
       return json(429, { error: "Please wait a moment before commenting again." });
     }
@@ -179,8 +189,4 @@ export default async (req) => {
     const message = error instanceof Error ? error.message : "Storage unavailable.";
     return json(503, { error: "Could not reach persistent storage.", detail: message });
   }
-};
-
-export const config = {
-  path: "/api/feedback",
-};
+}

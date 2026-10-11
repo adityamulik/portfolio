@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -34,6 +38,13 @@
   from = "/api/feedback"
   to = "/.netlify/functions/article-feedback"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/feedback/"
+  to = "/.netlify/functions/article-feedback"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/evidence"

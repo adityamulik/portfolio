@@ -123,21 +123,28 @@ export function ArticleFeedback({ slug }: { slug: string }) {
   }
 
   async function toggleLike() {
+    if (busy) {
+      return;
+    }
     const nextLiked = !liked;
-    setBusy(true);
+    const previousLikes = likes;
+    const previousLiked = liked;
+    const nextLikes = Math.max(0, likes + (nextLiked ? 1 : -1));
     setError("");
+    setLiked(nextLiked);
+    setLikes(nextLikes);
+    storeLiked(slug, nextLiked);
+    setBusy(true);
     try {
       if (usingLocal) {
-        applyState({
-          likes: Math.max(0, likes + (nextLiked ? 1 : -1)),
-          comments,
-        });
+        applyState({ likes: nextLikes, comments });
       } else {
         applyState(await requestFeedback(slug, { action: nextLiked ? "like" : "unlike" }));
       }
-      setLiked(nextLiked);
-      storeLiked(slug, nextLiked);
     } catch (err) {
+      setLiked(previousLiked);
+      setLikes(previousLikes);
+      storeLiked(slug, previousLiked);
       setError(err instanceof Error ? err.message : "Could not update the like.");
     } finally {
       setBusy(false);
@@ -197,7 +204,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
           <button
             type="button"
             onClick={toggleLike}
-            disabled={disabled}
+            disabled={!ready}
             aria-pressed={liked}
             aria-label={
               liked
