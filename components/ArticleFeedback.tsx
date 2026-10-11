@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import {
   FEEDBACK_ENDPOINT,
+  isLocalPreview,
   localState,
   readLiked,
   readStoredName,
@@ -59,7 +60,9 @@ export function ArticleFeedback({ slug }: { slug: string }) {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const [usingLocal, setUsingLocal] = useState(false);
+  const [persistent, setPersistent] = useState(false);
   const [ready, setReady] = useState(false);
+  const [available, setAvailable] = useState(true);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -74,16 +77,25 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         }
         setLikes(state.likes);
         setComments(state.comments);
+        setPersistent(Boolean(state.persistent));
         setUsingLocal(false);
+        setAvailable(true);
         setReady(true);
       })
       .catch(() => {
         if (cancelled) {
           return;
         }
+        if (!isLocalPreview()) {
+          setError("Comments and likes could not be loaded from site storage.");
+          setAvailable(false);
+          setReady(true);
+          return;
+        }
         const state = localState(slug);
         setLikes(state.likes);
         setComments(state.comments);
+        setPersistent(false);
         setUsingLocal(true);
         setReady(true);
       });
@@ -181,13 +193,18 @@ export function ArticleFeedback({ slug }: { slug: string }) {
       </h2>
       <p className="mt-3 text-ink-muted">
         Comments can be anonymous. Add a name if you want it shown. This browser remembers the name you use.
+        {persistent
+          ? " Likes and comments are saved on the site and stay after you leave."
+          : usingLocal
+            ? " This local preview saves feedback only in this browser. After deploy they are stored on the site."
+            : ""}
       </p>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
         <button
           type="button"
           onClick={toggleLike}
-          disabled={!ready || busy}
+          disabled={!ready || !available || busy}
           aria-pressed={liked}
           className={`rounded-md px-4 py-2 text-sm ${
             liked ? "bg-accent text-white" : "border border-ink/15 bg-surface text-ink hover:border-accent"
@@ -234,7 +251,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="submit"
-            disabled={!ready || busy}
+            disabled={!ready || !available || busy}
             className="rounded-md bg-navy px-4 py-2 text-sm text-foam hover:brightness-110 disabled:opacity-60"
           >
             Post comment

@@ -8,12 +8,20 @@ export type FeedbackComment = {
 export type FeedbackState = {
   likes: number;
   comments: FeedbackComment[];
+  persistent?: boolean;
 };
 
 const NAME_KEY = "aditya-writing-name";
 const LIKED_KEY = "aditya-writing-liked:";
 const LOCAL_STORE = "aditya-writing-feedback";
 export const FEEDBACK_ENDPOINT = "/api/feedback";
+
+export function isLocalPreview() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+  return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+}
 
 export function readStoredName() {
   try {
