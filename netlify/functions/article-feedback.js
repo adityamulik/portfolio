@@ -55,9 +55,22 @@ function onLambda() {
   }
 }
 
+function env(name) {
+  return process.env[name] || "";
+}
+
 function openBlobs() {
+  const options = { name: STORE_NAME, consistency: "strong" };
+  const siteID = env("SITE_ID") || env("NETLIFY_SITE_ID");
+  const token = env("NETLIFY_AUTH_TOKEN") || env("BLOBS_TOKEN");
+  if (siteID) {
+    options.siteID = siteID;
+  }
+  if (token) {
+    options.token = token;
+  }
   try {
-    return getStore({ name: STORE_NAME, consistency: "strong" });
+    return getStore(options);
   } catch {
     return null;
   }
