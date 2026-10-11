@@ -1,7 +1,7 @@
-import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
-import { getStore } from "@netlify/blobs";
+const { createHash } = require("node:crypto");
+const { mkdir, readFile, writeFile } = require("node:fs/promises");
+const path = require("node:path");
+const { getStore } = require("@netlify/blobs");
 
 const SLUG = /^[a-z0-9-]{1,80}$/;
 const MAX_COMMENTS = 200;
@@ -55,13 +55,9 @@ function onLambda() {
   }
 }
 
-function blobStore() {
-  return getStore({ name: STORE_NAME, consistency: "strong" });
-}
-
 function openBlobs() {
   try {
-    return blobStore();
+    return getStore({ name: STORE_NAME, consistency: "strong" });
   } catch {
     return null;
   }
@@ -124,7 +120,7 @@ function parseBody(event) {
   return JSON.parse(raw);
 }
 
-export async function handler(event) {
+exports.handler = async function handler(event) {
   const method = event.httpMethod || "GET";
   if (method === "OPTIONS") {
     return { statusCode: 204, body: "" };
@@ -212,4 +208,4 @@ export async function handler(event) {
     const message = error instanceof Error ? error.message : "Storage unavailable.";
     return json(503, { error: "Could not save that just now.", detail: message });
   }
-}
+};

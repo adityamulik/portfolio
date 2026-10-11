@@ -7,8 +7,7 @@
 
 [functions]
   directory = "netlify/functions"
-  node_bundler = "nft"
-  external_node_modules = ["@netlify/blobs"]
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
