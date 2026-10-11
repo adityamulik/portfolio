@@ -8,6 +8,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  external_node_modules = ["@netlify/blobs", "@netlify/runtime-utils"]
 
 [[headers]]
   for = "/*"
