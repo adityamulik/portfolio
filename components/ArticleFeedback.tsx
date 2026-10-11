@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import {
   FEEDBACK_ENDPOINT,
   isLocalPreview,
@@ -19,12 +19,10 @@ function formatStamp(value: string) {
   if (Number.isNaN(date.getTime())) {
     return "";
   }
-  return date.toLocaleString("en-US", {
-    month: "long",
+  return date.toLocaleDateString("en-US", {
+    month: "short",
     day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
+    year: date.getFullYear() === new Date().getFullYear() ? undefined : "numeric",
   });
 }
 
@@ -50,6 +48,20 @@ async function requestFeedback(slug: string, payload?: Record<string, string>) {
   return (await response.json()) as FeedbackState;
 }
 
+function Heart({ filled }: { filled: boolean }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+      <path
+        d="M12 20s-7-4.4-9.3-8.1C.8 8.8 2.2 5 6 5c2 0 3.4 1.1 4 2.2C10.6 6.1 12 5 14 5c3.8 0 5.2 3.8 3.3 6.9C19 15.6 12 20 12 20z"
+        fill={filled ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ArticleFeedback({ slug }: { slug: string }) {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState<FeedbackComment[]>([]);
@@ -60,7 +72,6 @@ export function ArticleFeedback({ slug }: { slug: string }) {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const [usingLocal, setUsingLocal] = useState(false);
-  const [persistent, setPersistent] = useState(false);
   const [ready, setReady] = useState(false);
   const [available, setAvailable] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -77,7 +88,6 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         }
         setLikes(state.likes);
         setComments(state.comments);
-        setPersistent(Boolean(state.persistent));
         setUsingLocal(false);
         setAvailable(true);
         setReady(true);
@@ -87,7 +97,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
           return;
         }
         if (!isLocalPreview()) {
-          setError("Comments and likes could not be loaded from site storage.");
+          setError("Could not load likes and comments.");
           setAvailable(false);
           setReady(true);
           return;
@@ -95,7 +105,6 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         const state = localState(slug);
         setLikes(state.likes);
         setComments(state.comments);
-        setPersistent(false);
         setUsingLocal(true);
         setReady(true);
       });
@@ -104,13 +113,6 @@ export function ArticleFeedback({ slug }: { slug: string }) {
       cancelled = true;
     };
   }, [slug]);
-
-  const likeLabel = useMemo(() => {
-    if (likes === 1) {
-      return "1 like";
-    }
-    return `${likes} likes`;
-  }, [likes]);
 
   function applyState(state: FeedbackState) {
     setLikes(state.likes);
@@ -126,11 +128,10 @@ export function ArticleFeedback({ slug }: { slug: string }) {
     setError("");
     try {
       if (usingLocal) {
-        const next = {
+        applyState({
           likes: Math.max(0, likes + (nextLiked ? 1 : -1)),
           comments,
-        };
-        applyState(next);
+        });
       } else {
         applyState(await requestFeedback(slug, { action: nextLiked ? "like" : "unlike" }));
       }
@@ -175,7 +176,7 @@ export function ArticleFeedback({ slug }: { slug: string }) {
         );
       }
       setBody("");
-      setStatus("Comment posted.");
+      setStatus("Posted.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post that comment.");
     } finally {
@@ -184,111 +185,109 @@ export function ArticleFeedback({ slug }: { slug: string }) {
   }
 
   const visibleComments = [...comments].reverse();
+  const disabled = !ready || !available || busy;
 
   return (
-    <section className="mt-16 max-w-3xl border-t border-ink/10 pt-10" aria-labelledby="article-feedback-title">
-      <p className="eyebrow">Feedback</p>
-      <h2 id="article-feedback-title" className="mt-3 font-display text-3xl text-ink">
-        Likes and comments
-      </h2>
-      <p className="mt-3 text-ink-muted">
-        Comments can be anonymous. Add a name if you want it shown. This browser remembers the name you use.
-        {persistent
-          ? " Likes and comments are saved on the site and stay after you leave."
-          : usingLocal
-            ? " This local preview saves feedback only in this browser. After deploy they are stored on the site."
-            : ""}
-      </p>
-
-      <div className="mt-6 flex flex-wrap items-center gap-4">
-        <button
-          type="button"
-          onClick={toggleLike}
-          disabled={!ready || !available || busy}
-          aria-pressed={liked}
-          className={`rounded-md px-4 py-2 text-sm ${
-            liked ? "bg-accent text-white" : "border border-ink/15 bg-surface text-ink hover:border-accent"
-          }`}
-        >
-          {liked ? "Liked" : "Like this article"}
-        </button>
-        <p className="text-sm text-ink-muted" aria-live="polite">
-          {ready ? likeLabel : "Loading likes…"}
-        </p>
+    <section className="mt-14 max-w-3xl border-t border-ink/10 pt-8" aria-labelledby="article-feedback-title">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 id="article-feedback-title" className="font-display text-2xl text-ink">
+          Comments
+        </h2>
+        <div className="flex items-center gap-2 text-sm">
+          <button
+            type="button"
+            onClick={toggleLike}
+            disabled={disabled}
+            aria-pressed={liked}
+            aria-label={liked ? `Unlike. ${likes} likes` : `Like. ${likes} likes`}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 transition ${
+              liked
+                ? "border-accent bg-accent text-white"
+                : "border-ink/15 bg-surface text-ink hover:border-accent hover:text-accent"
+            } disabled:opacity-60`}
+          >
+            <Heart filled={liked} />
+            <span aria-live="polite">{ready ? likes : "…"}</span>
+          </button>
+          <p className="text-ink-muted" aria-live="polite">
+            {comments.length} {comments.length === 1 ? "comment" : "comments"}
+          </p>
+        </div>
       </div>
 
-      <form className="relative mt-8 grid gap-4" onSubmit={onSubmit}>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="grid gap-2 text-sm text-ink">
-            Name
-            <input
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              maxLength={80}
-              autoComplete="nickname"
-              placeholder="Anonymous"
-              className="rounded-md border border-ink/15 bg-surface px-3 py-2 text-base text-ink outline-none focus:border-accent"
-            />
+      {usingLocal ? (
+        <p className="mt-3 text-sm text-ink-muted">Local preview. Saved in this browser only.</p>
+      ) : null}
+
+      <form className="relative mt-5" onSubmit={onSubmit}>
+        <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
+          Company
+          <input value={website} onChange={(event) => setWebsite(event.target.value)} tabIndex={-1} autoComplete="off" />
+        </label>
+        <div className="rounded-lg border border-ink/15 bg-surface focus-within:border-accent">
+          <label className="sr-only" htmlFor="article-comment">
+            Comment
           </label>
-          <label className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden">
-            Company
-            <input value={website} onChange={(event) => setWebsite(event.target.value)} tabIndex={-1} autoComplete="off" />
-          </label>
-        </div>
-        <label className="grid gap-2 text-sm text-ink">
-          Comment
           <textarea
+            id="article-comment"
             value={body}
             onChange={(event) => setBody(event.target.value)}
             required
             minLength={2}
             maxLength={1200}
-            rows={5}
-            placeholder="What did you think?"
-            className="rounded-md border border-ink/15 bg-surface px-3 py-2 text-base text-ink outline-none focus:border-accent"
+            rows={3}
+            placeholder="Add a comment"
+            className="w-full resize-y rounded-t-lg bg-transparent px-3 py-2.5 text-base text-ink outline-none"
           />
-        </label>
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="submit"
-            disabled={!ready || !available || busy}
-            className="rounded-md bg-navy px-4 py-2 text-sm text-foam hover:brightness-110 disabled:opacity-60"
-          >
-            Post comment
-          </button>
-          {status ? (
-            <p className="text-sm text-ink" role="status">
-              {status}
-            </p>
-          ) : null}
-          {error ? (
-            <p className="text-sm text-accent" role="alert">
-              {error}
-            </p>
-          ) : null}
+          <div className="flex flex-wrap items-center gap-2 border-t border-ink/10 px-2 py-2">
+            <label className="sr-only" htmlFor="article-comment-name">
+              Name (optional)
+            </label>
+            <input
+              id="article-comment-name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              maxLength={80}
+              autoComplete="nickname"
+              placeholder="Name (optional)"
+              className="min-w-0 flex-1 rounded-md bg-transparent px-1.5 py-1.5 text-sm text-ink outline-none placeholder:text-ink-muted"
+            />
+            <button
+              type="submit"
+              disabled={disabled}
+              className="rounded-md bg-navy px-3 py-1.5 text-sm text-foam hover:brightness-110 disabled:opacity-60"
+            >
+              Post
+            </button>
+          </div>
         </div>
+        {status ? (
+          <p className="mt-2 text-sm text-ink" role="status">
+            {status}
+          </p>
+        ) : null}
+        {error ? (
+          <p className="mt-2 text-sm text-accent" role="alert">
+            {error}
+          </p>
+        ) : null}
       </form>
 
-      <div className="mt-10">
-        <h3 className="font-display text-2xl text-ink">
-          {comments.length === 1 ? "1 comment" : `${comments.length} comments`}
-        </h3>
-        {visibleComments.length === 0 ? (
-          <p className="mt-4 text-ink-muted">No comments yet. Be the first.</p>
-        ) : (
-          <ul className="mt-5 grid gap-4">
-            {visibleComments.map((comment) => (
-              <li key={comment.id} className="rounded-lg border border-ink/10 bg-surface p-5">
-                <p className="text-sm text-ink-muted">
-                  {comment.name}
-                  {comment.at ? ` · ${formatStamp(comment.at)}` : ""}
-                </p>
-                <p className="mt-2 whitespace-pre-wrap text-ink">{comment.body}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {visibleComments.length === 0 ? (
+        <p className="mt-6 text-sm text-ink-muted">No comments yet.</p>
+      ) : (
+        <ul className="mt-6 divide-y divide-ink/10 border-t border-ink/10">
+          {visibleComments.map((comment) => (
+            <li key={comment.id} className="py-4">
+              <p className="text-sm text-ink-muted">
+                <span className="font-medium text-ink">{comment.name}</span>
+                {comment.at ? ` · ${formatStamp(comment.at)}` : ""}
+              </p>
+              <p className="mt-1 whitespace-pre-wrap text-ink">{comment.body}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
