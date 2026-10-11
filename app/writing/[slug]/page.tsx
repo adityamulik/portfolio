@@ -42,7 +42,7 @@ export default async function WritingPostPage({ params }: { params: Params }) {
       <p className="mt-5 max-w-2xl text-xl text-ink-muted">{post.summary}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {post.tags.map((tag) => (
-          <span key={tag} className="rounded-full bg-band px-3 py-1 text-xs uppercase tracking-wide text-ink-muted">
+          <span key={tag} className="rounded-full bg-foam px-3 py-1 text-xs uppercase tracking-wide text-ink-muted">
             {tag}
           </span>
         ))}
