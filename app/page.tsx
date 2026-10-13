@@ -84,7 +84,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Selected work"
               title="Platforms other teams ship on"
-              description="Four pieces of shared infrastructure: agents, Fresh forecasting, federation and localization automation."
+              description="Three pieces of shared infrastructure: agents, Fresh forecasting and federation."
             />
             <Link href="/work/" className="hidden shrink-0 text-sm text-accent sm:block">
               All work

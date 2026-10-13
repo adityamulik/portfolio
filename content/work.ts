@@ -50,7 +50,7 @@ export const roles: Role[] = [
     location: "Boston, MA",
     dates: "May 2022 - Aug 2022",
     bullets: [
-      "To help global enterprise users adopt Ansible products in their own languages, co-developed the official Ansible Memsource collection, automating the end-to-end localization pipeline through the Memsource translation API and reaching 2,000+ downloads on Ansible Galaxy.",
+      "To help global enterprise users adopt Ansible products in their own languages, co-developed the official ansible.memsource collection. It is still published on Ansible Galaxy with 2,000+ downloads.",
     ],
     links: [
       {
@@ -193,8 +193,8 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Red Hat",
     dates: "May 2022 - Aug 2022",
     summary:
-      "Ansible collection that automates the localization pipeline through the Memsource API. 2,000+ downloads on Ansible Galaxy.",
-    featured: true,
+      "Official ansible.memsource collection for localization automation. Still published on Ansible Galaxy with 2,000+ downloads.",
+    featured: false,
     problem:
       "Enterprise users needed Ansible products in their own languages. Localization did not look like the rest of Ansible Automation Platform.",
     approach: [
@@ -203,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
       "Shipped companion Python bindings so the same API works outside playbooks.",
     ],
     impact: [
-      "2,000+ downloads on Ansible Galaxy.",
+      "Still published on Ansible Galaxy in the official ansible namespace, with 2,000+ downloads.",
     ],
     stack: ["Python", "Ansible", "YAML", "Memsource API"],
     links: [
