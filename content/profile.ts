@@ -13,7 +13,7 @@ export const profile = {
   summary:
     "Senior software engineer in platform and distributed systems. Most of my time goes into shared infrastructure that has to stay correct under load: federated APIs, read-through caches, ingestion paths and agent platforms. The pages here are for hiring managers and as a public record of talks, judging and writing.",
   about:
-    "I am a platform engineer at Walmart Global Tech. I work on the Store Agentic Platform (from Feb 2026), a federated GraphQL gateway across 30+ providers and a read-through cache on a tier-0 path. I also run multi-agent workflows for Fresh waste and inventory forecasting. Before Walmart I built localization automation at Red Hat, TA'd graduate design courses at Northeastern and spent several years on Python and Linux platforms. I speak, judge and write because that work should be easy to verify.",
+    "I am a platform engineer at Walmart Global Tech. I work on the Store Agentic Platform (from Feb 2026), a federated GraphQL gateway across 30+ providers and a read-through cache on a tier-0 path. I also run multi-agent workflows for Fresh waste and inventory forecasting. Before Walmart I interned at Red Hat, TA'd graduate design courses at Northeastern and spent several years on Python and Linux platforms. I speak, judge and write because that work should be easy to verify.",
 };
 
 export const nav = [
