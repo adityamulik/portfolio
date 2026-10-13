@@ -54,6 +54,10 @@ export const roles: Role[] = [
     ],
     links: [
       {
+        label: "Ansible Galaxy · ansible.memsource",
+        href: "https://galaxy.ansible.com/ui/repo/published/ansible/memsource/",
+      },
+      {
         label: "GitHub · ansible-collection-memsource",
         href: "https://github.com/ansible/ansible-collection-memsource",
       },
