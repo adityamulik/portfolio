@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CaseStudy } from "@/content/work";
 import type { RecognitionItem } from "@/content/recognition";
+import type { ExternalPiece } from "@/content/external-writing";
 import type { PostMeta } from "@/lib/posts";
 import { formatWritingDate } from "@/lib/dates";
 import { PdfLink } from "@/components/ResumeModal";
@@ -38,6 +39,48 @@ export function RecognitionCard({ item }: { item: RecognitionItem }) {
           ))}
         </div>
       ) : null}
+    </article>
+  );
+}
+
+export function ExternalWritingCard({
+  piece,
+  className = "",
+}: {
+  piece: ExternalPiece;
+  className?: string;
+}) {
+  return (
+    <article className={`rounded-lg border border-ink/10 bg-surface p-6 hover:border-accent/50 ${className}`}>
+      <p className="eyebrow">{piece.venue}</p>
+      <p className="mt-2 text-sm text-ink-muted">{formatWritingDate(piece.date)}</p>
+      <h3 className="mt-3 font-display text-2xl text-ink">
+        <a
+          href={piece.href}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-accent"
+        >
+          {piece.title}
+        </a>
+      </h3>
+      <p className="mt-3 flex-1 text-ink-muted">{piece.summary}</p>
+      {piece.callout ? (
+        <p className="mt-4 text-sm text-ink-muted">
+          Featured in{" "}
+          <PdfLink href={piece.callout.href} label={piece.callout.label} />
+        </p>
+      ) : null}
+      <p className="mt-6 text-sm">
+        <a
+          href={piece.href}
+          target="_blank"
+          rel="noreferrer"
+          className="text-accent"
+        >
+          Read on {piece.venue}
+        </a>
+      </p>
     </article>
   );
 }

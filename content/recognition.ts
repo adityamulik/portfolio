@@ -36,9 +36,15 @@ export const recognition: RecognitionItem[] = [
     venue: "InfoQ",
     date: "October 2026",
     summary:
-      "Published article on InfoQ about the platform layer required to run LLM systems in production. Independent editorial venue.",
+      "Published article on InfoQ about the platform layer required to run LLM systems in production. Independent editorial venue. Featured in Pat Kua's Level Up newsletter, issue 375.",
     proofLabel: "InfoQ article",
     proofUrl: "https://www.infoq.com/articles/platform-engineering-playbook-production-llms/",
+    extraProofs: [
+      {
+        label: "Level Up issue 375",
+        url: "https://sh1.sendinblue.com/mk/sc/W_IjdhXxd0LrIpM2eWLtfkx7FJmNrbGSWwmOHntno7I-5kBuhR_QiZIqIFDIekDivHRBu5Nlfoh6XafG2WmOQRTB7ZBQZBc",
+      },
+    ],
     featured: true,
   },
   {

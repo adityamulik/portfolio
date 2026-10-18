@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { RecognitionCard, PostCard, WorkCard } from "@/components/cards";
+import { RecognitionCard, ExternalWritingCard, PostCard, WorkCard } from "@/components/cards";
 import { ResumeButton } from "@/components/ResumeModal";
 import { Container, SectionHeading } from "@/components/ui";
 import { featuredRecognition } from "@/content/recognition";
 import { externalWriting } from "@/content/external-writing";
-import { formatWritingDate } from "@/lib/dates";
 import { impactStats, profile } from "@/content/profile";
 import { featuredCaseStudies } from "@/content/work";
 import { createMetadata } from "@/lib/seo";
@@ -132,19 +131,11 @@ export default function HomePage() {
           </div>
           <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2">
             {externalWriting.slice(0, 2).map((piece) => (
-              <a
+              <ExternalWritingCard
                 key={piece.href}
-                href={piece.href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex h-full min-h-[200px] flex-col rounded-lg border border-ink/10 bg-surface p-6 hover:border-accent/50"
-              >
-                <p className="eyebrow">{piece.venue}</p>
-                <p className="mt-2 text-sm text-ink-muted">{formatWritingDate(piece.date)}</p>
-                <h3 className="mt-3 font-display text-2xl text-ink">{piece.title}</h3>
-                <p className="mt-3 flex-1 text-ink-muted">{piece.summary}</p>
-                <p className="mt-6 text-sm text-accent">Read on {piece.venue}</p>
-              </a>
+                piece={piece}
+                className="flex h-full min-h-[200px] flex-col"
+              />
             ))}
             {posts.map((post) => (
               <PostCard key={post.slug} post={post} />

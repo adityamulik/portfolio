@@ -1,7 +1,6 @@
-import { PostCard } from "@/components/cards";
+import { ExternalWritingCard, PostCard } from "@/components/cards";
 import { Container } from "@/components/ui";
 import { externalWriting } from "@/content/external-writing";
-import { formatWritingDate } from "@/lib/dates";
 import { createMetadata } from "@/lib/seo";
 import { getPublishedPosts } from "@/lib/posts";
 
@@ -23,19 +22,7 @@ export default function WritingPage() {
         <h2 className="font-display text-2xl text-ink">Elsewhere</h2>
         <div className="mt-6 grid gap-5">
           {externalWriting.map((piece) => (
-            <a
-              key={piece.href}
-              href={piece.href}
-              target="_blank"
-              rel="noreferrer"
-              className="block rounded-lg border border-ink/10 bg-surface p-6 hover:border-accent/50"
-            >
-              <p className="text-sm text-ink-muted">
-                {piece.venue} · {formatWritingDate(piece.date)}
-              </p>
-              <h3 className="mt-2 font-display text-2xl text-ink">{piece.title}</h3>
-              <p className="mt-3 text-ink-muted">{piece.summary}</p>
-            </a>
+            <ExternalWritingCard key={piece.href} piece={piece} />
           ))}
         </div>
       </section>
