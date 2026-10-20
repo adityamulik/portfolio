@@ -41,6 +41,7 @@ export const roles: Role[] = [
     dates: "Jan 2023 - Nov 2025",
     bullets: [
       "To unify fragmented data access, built a federated GraphQL gateway across 30+ providers plus ingestion pipelines with a read-through cache, delivering low-latency tier-0 availability (99.999%) for millions of users.",
+      "To scale event streaming for higher throughput and reliability, led a live migration of 3M+ events/day from Azure Service Bus to Kafka, designing partitioning and consumer rebalancing strategies that delivered zero downtime and zero data loss during cutover.",
       "Worked the associate clock-in path used across 5000+ stores and about 3 million associates, including caching so store operations could depend on 99.999% uptime.",
     ],
   },
@@ -171,6 +172,7 @@ export const caseStudies: CaseStudy[] = [
     approach: [
       "Built a federated GraphQL gateway (Apollo) so each domain publishes a subgraph and clients query one graph.",
       "Paired it with high-throughput ingestion for billions of events.",
+      "Led a live cutover of 3M+ events/day from Azure Service Bus to Kafka, with partitioning and consumer rebalancing so the stream kept throughput and reliability without downtime or data loss.",
       "Added a read-through cache on the hot path so repeated reads do not wait on every provider.",
       "This is the same class of work that started with associate clock-in status for 5000+ stores and about 3 million associates: 99.999% uptime because store operations run on it.",
     ],
@@ -178,6 +180,7 @@ export const caseStudies: CaseStudy[] = [
       "30+ providers behind one graph.",
       "Read-through cache for low-latency reads.",
       "Billions of events on the ingestion path.",
+      "Live Kafka cutover of 3M+ events/day with zero downtime and zero data loss.",
       "99.999% availability for millions of users on a tier-0 path.",
     ],
     stack: [
