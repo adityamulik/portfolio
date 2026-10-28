@@ -18,7 +18,7 @@ export const metadata = createMetadata({
 });
 
 export default function HomePage() {
-  const posts = getPublishedPosts().slice(0, 2);
+  const posts = getPublishedPosts().slice(0, 3);
 
   return (
     <>
