@@ -192,9 +192,24 @@ it to keep up as the writes multiplied.
 
 ## References
 
-1. Prometheus Authors, "Data model," Prometheus documentation. [https://prometheus.io/docs/concepts/data_model/](https://prometheus.io/docs/concepts/data_model/)
-2. Prometheus Authors, "Metric and label naming," Prometheus documentation. Caution against labels for user IDs, email addresses and other unbounded values. [https://prometheus.io/docs/practices/naming/](https://prometheus.io/docs/practices/naming/)
-3. Prometheus Authors, "Instrumentation," Prometheus documentation. Cardinality guidelines and the node_exporter scaling example. [https://prometheus.io/docs/practices/instrumentation/](https://prometheus.io/docs/practices/instrumentation/)
-4. Prometheus Authors, "The Zen of Prometheus," Prometheus documentation. "Prometheus performance almost always comes down to one thing: label cardinality." [https://prometheus.io/docs/practices/the_zen/](https://prometheus.io/docs/practices/the_zen/)
-5. Kubernetes Authors, "Resource Management for Pods and Containers," Kubernetes documentation. CPU limits as a kernel-enforced hard cap. [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
-6. Linux Kernel Documentation, "CFS Bandwidth Control." Quota, period and throttled threads. [https://docs.kernel.org/scheduler/sched-bwc.html](https://docs.kernel.org/scheduler/sched-bwc.html)
+1. <a name="ref-1"></a> Prometheus Authors, "Data model," Prometheus
+   documentation.
+   [https://prometheus.io/docs/concepts/data_model/](https://prometheus.io/docs/concepts/data_model/)
+2. <a name="ref-2"></a> Prometheus Authors, "Metric and label naming," Prometheus
+   documentation. Caution against labels for user IDs, email addresses and
+   other unbounded values.
+   [https://prometheus.io/docs/practices/naming/](https://prometheus.io/docs/practices/naming/)
+3. <a name="ref-3"></a> Prometheus Authors, "Instrumentation," Prometheus
+   documentation. Cardinality guidelines and the node_exporter scaling example.
+   [https://prometheus.io/docs/practices/instrumentation/](https://prometheus.io/docs/practices/instrumentation/)
+4. <a name="ref-4"></a> Prometheus Authors, "The Zen of Prometheus," Prometheus
+   documentation. "Prometheus performance almost always comes down to one
+   thing: label cardinality."
+   [https://prometheus.io/docs/practices/the_zen/](https://prometheus.io/docs/practices/the_zen/)
+5. <a name="ref-5"></a> Kubernetes Authors, "Resource Management for Pods and
+   Containers," Kubernetes documentation. CPU limits as a kernel-enforced hard
+   cap.
+   [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+6. <a name="ref-6"></a> Linux Kernel Documentation, "CFS Bandwidth Control."
+   Quota, period and throttled threads.
+   [https://docs.kernel.org/scheduler/sched-bwc.html](https://docs.kernel.org/scheduler/sched-bwc.html)
